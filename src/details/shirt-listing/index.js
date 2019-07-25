@@ -1,6 +1,9 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import ShirtListItem from './shirt-list-item'
+import DepartmentList from '../departments/departmentlist'
+import CategoriesList from '../categories/categorieslist'
+import './index.css'
 class ShirtList extends Component {
 
     constructor(props) {
@@ -12,14 +15,21 @@ class ShirtList extends Component {
         let currentShirtProducts = this.props.products.items
         const renderShirtProducts = currentShirtProducts.map(product => {
             return (
-                <ShirtListItem product={product}/>
+                <ShirtListItem product={product} />
             )
         })
 
-        return(
+        return (
             <div>
-            <h>Render Products</h>
-            { renderShirtProducts }
+                <div>
+                    <div className="menu">
+                        <DepartmentList />
+                        <CategoriesList />
+                    </div>
+                    <div className="product-listing">
+                        {renderShirtProducts}
+                    </div>
+                </div>
             </div>
         );
 

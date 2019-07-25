@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import ShirtList from '../details/shirt-listing'
-import { fetchCatalogueProducts } from '../action/requestActions'
+import { fetchCatalogueProducts, fetchDepartments, fetchCategories } from '../action/requestActions'
 class Home extends Component {
     constructor(props){
         super(props)
@@ -9,7 +9,11 @@ class Home extends Component {
     
     componentWillMount() {
         let catalogueurl="http://127.0.0.1:8080/products"
+        let departmentsurl="http://127.0.0.1:8080/departments"
+        let categoriesurl="http://127.0.0.1:8080/categories"
         this.props.fetchCatalogueProducts(catalogueurl)
+        this.props.fetchDepartments(departmentsurl)
+        this.props.fetchCategories(categoriesurl)
     }
 
 render(){
@@ -24,7 +28,9 @@ render(){
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        fetchCatalogueProducts: (catalogueurl) => dispatch(fetchCatalogueProducts(catalogueurl))
+        fetchCatalogueProducts: (catalogueurl) => dispatch(fetchCatalogueProducts(catalogueurl)),
+        fetchDepartments: (departmentsurl) => dispatch(fetchDepartments(departmentsurl)),
+        fetchCategories: (categoriesurl) => dispatch(fetchCategories(categoriesurl))
     }
 }
 

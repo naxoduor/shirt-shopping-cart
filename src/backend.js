@@ -10,7 +10,7 @@ const connection = mysql.createConnection({
   host: '127.0.0.1',
   user: 'root',
   password: 'root',
-  database: 'shirts2'
+  database: 'shirts4'
 });
 
 // Initialize the app
@@ -29,12 +29,27 @@ connection.connect();
 // https://expressjs.com/en/guide/routing.html
 app.get('/products', function (request, response) {
   console.log("get products")
+  let inDepartmentId = 1
   let inShortProductDescriptionLength= 45
   let inProductsPerPage = 8
   let inStartItem = 0
-  let params={inShortProductDescriptionLength: inShortProductDescriptionLength, inProductsPerPage: inProductsPerPage, inStartItem: inStartItem}
+  let params={inDepartmentId: inDepartmentId, inShortProductDescriptionLength: inShortProductDescriptionLength, inProductsPerPage: inProductsPerPage, inStartItem: inStartItem}
   console.log(params)
-   connection.query('call catalog_get_products_on_catalog(?, ?, ?)', [params.inShortProductDescriptionLength, params.inProductsPerPage, params.inStartItem], function(err, results){
+   connection.query('call catalog_get_products_on_department(?, ?, ?, ?)', [params.inDepartmentId, params.inShortProductDescriptionLength, params.inProductsPerPage, params.inStartItem], function(err, results){
+    if(err) throw err
+    response.send(results[0])
+  })
+})
+
+app.get('/departments', function (request, response){
+  connection.query('call catalog_get_departments_list()', function(err, results){
+    if(err) throw err
+  response.send(results[0])
+  })
+})
+
+app.get('/categories', function(request, response){
+  connection.query('call catalog_get_categories()', function(err, results){
     if(err) throw err
     response.send(results[0])
   })
