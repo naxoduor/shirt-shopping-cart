@@ -2,6 +2,7 @@ const express = require('express');
 const mysql = require('mysql');
 var cors = require('cors');
 const url = require('url');
+const querystring = require('querystring');
 //const logger = require('morgan');
 
 
@@ -50,6 +51,46 @@ app.get('/departments', function (request, response){
 
 app.get('/categories', function(request, response){
   connection.query('call catalog_get_categories()', function(err, results){
+    if(err) throw err
+    response.send(results[0])
+  })
+})
+
+app.get('/categories/inDepartment/*', function(req, response){
+  let parsedUrl = url.parse(req.url);
+  let parsedQs = querystring.parse(parsedUrl.query)
+  let inDepartmentId = parsedQs.id
+  let params = {inDepartmentId:inDepartmentId}
+  connection.query('call catalog_get_department_categories(?)', [params.inDepartmentId], function(err, results){
+    if(err) throw err
+    response.send(results[0])
+  })
+})
+
+app.get('/products/inDepartment/*', function(req, response){
+  let parsedUrl = url.parse(req.url);
+  let parsedQs = querystring.parse(parsedUrl.query)
+  let inDepartmentId = parsedQs.id
+  let inShortProductDescriptionLength = 45;
+  let inProductsPerPage = 8;
+  let inStartItem = 0;
+  let params = {inDepartmentId:inDepartmentId, inShortProductDescriptionLength:inShortProductDescriptionLength, inProductsPerPage:inProductsPerPage, inStartItem:inStartItem}
+  connection.query('call catalog_get_products_on_department(?, ?, ?, ?)', [params.inDepartmentId, params.inShortProductDescriptionLength, params.inProductsPerPage, params.inStartItem], function(err, results){
+    if(err) throw err
+    response.send(results[0])
+  })
+})
+
+app.get('/products/inCategory/*', function(req, response){
+  let parsedUrl = url.parse(req.url);
+  let parsedQs = querystring.parse(parsedUrl.query)
+  let inCategorytId = parsedQs.id
+  let inShortProductDescriptionLength = 45;
+  let inProductsPerPage = 8;
+  let inStartItem = 0;
+  let params = {inCategorytId:inCategorytId, inShortProductDescriptionLength:inShortProductDescriptionLength, inProductsPerPage:inProductsPerPage, inStartItem:inStartItem}
+  console.log(params)
+  connection.query('call catalog_get_products_in_category(?, ?, ?, ?)', [params.inCategorytId, params.inShortProductDescriptionLength, params.inProductsPerPage, params.inStartItem], function(err, results){
     if(err) throw err
     response.send(results[0])
   })
