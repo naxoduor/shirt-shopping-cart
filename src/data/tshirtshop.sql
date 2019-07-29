@@ -67,7 +67,7 @@ CREATE TABLE `product_attribute` (
 
 -- Create shopping_cart table
 CREATE TABLE `shopping_cart` (
-  `item_id`     INT           NOT NULL  AUTO_INCREMENT,
+  `item_id`     VARCHAR(255)  NOT NULL,
   `cart_id`     CHAR(32)      NOT NULL,
   `product_id`  INT           NOT NULL,
   `attributes`  VARCHAR(1000) NOT NULL,
