@@ -19,7 +19,6 @@ class Home extends Component {
 render(){
     return (
      <div>
-        <h>Loading The HomePage</h>
         <ShirtList />
     </div>
     );

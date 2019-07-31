@@ -1,6 +1,6 @@
 import axios from 'axios'
 import localStorage from 'local-storage'
-import { FETCH_CATALOGUE_PRODUCTS, FETCH_DEPARTMENTS, FETCH_CATEGORIES, FETCH_CATEGORIES_BY_DEPARTMENT, FETCH_PRODUCTS_BY_DEPARTMENT, FETCH_PRODUCTS_BY_CATEGORY } from './types'
+import { FETCH_CATALOGUE_PRODUCTS, FETCH_DEPARTMENTS, FETCH_CATEGORIES, FETCH_CATEGORIES_BY_DEPARTMENT, FETCH_PRODUCTS_BY_DEPARTMENT, FETCH_PRODUCTS_BY_CATEGORY, FETCH_CART_ITEMS, FETCH_CART_AMOUNT } from './types'
 
 export const fetchCatalogueProducts = (productsurl) => dispatch => {
 
@@ -71,4 +71,25 @@ export const addToCart = (carturl, cartId, item) => dispatch => {
     params.productId = item.product_id
     params.attributes = `Color is ${item.color} and size is ${item.size}`
     axios.post(carturl,{ params })
+}
+
+export const fetchCartItems =  (carturl) => dispatch => {
+
+console.log(carturl)
+    axios.get(carturl)
+    .then(res => res.data)
+    .then(cartItems => dispatch({
+        type: FETCH_CART_ITEMS,
+        payload: cartItems
+    }))
+}
+
+export const fetchCartTotalAmount = (carturl) => dispatch => {
+
+    axios.get(carturl)
+    .then(res => res.data)
+    .then(cartAmount => dispatch({
+        type: FETCH_CART_AMOUNT,
+        payload: cartAmount
+    }))
 }

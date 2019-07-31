@@ -2,13 +2,29 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import ShirtListItem from './shirt-list-item'
 import DepartmentList from '../departments/departmentlist'
-import CategoriesList from '../categories/categorieslist'
+import Cart from '../cart'
+import localStorage from 'local-storage'
+import { fetchCartItems } from '../../action/requestActions'
 import './index.css'
 class ShirtList extends Component {
 
     constructor(props) {
         super(props)
+        this.state = { showCart:false }
+
     }
+
+    displayCart = () => {
+
+        let carturl="http://127.0.0.1:8080/shoppingcart/?cart_id="+localStorage.get("cartId");
+        this.props.fetchCartItems(carturl)
+        console.log("set state to true")
+        this.setState({ showCart: true })
+      }
+    
+      hideCart = () => {
+        this.setState({ showCart: false })
+      }
 
     render() {
 
@@ -24,10 +40,11 @@ class ShirtList extends Component {
                 <div>
                     <div className="menu">
                         <DepartmentList />
-                        <CategoriesList />
+                        <div><button onClick = { this.displayCart }>View Cart</button></div>
                     </div>
                     <div className="product-listing">
                         {renderShirtProducts}
+                        <Cart show={ this.state.showCart } handleClose={this.hideCart } />
                     </div>
                 </div>
             </div>
@@ -40,4 +57,9 @@ const mapStateToProps = state => ({
     products: state.products
 })
 
-export default connect(mapStateToProps, null)(ShirtList)
+const mapDispatchToProps = (dispatch) => {
+    return {
+        fetchCartItems: (carturl) => dispatch(fetchCartItems(carturl))    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(ShirtList)
