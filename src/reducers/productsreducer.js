@@ -1,4 +1,8 @@
-import { FETCH_CATALOGUE_PRODUCTS, FETCH_PRODUCTS_BY_DEPARTMENT, FETCH_PRODUCTS_BY_CATEGORY } from '../action/types';
+import {
+    FETCH_CATALOGUE_PRODUCTS, FETCH_PRODUCTS_BY_DEPARTMENT,
+    FETCH_PRODUCTS_BY_CATEGORY, FETCH_CATEGORY_PAGE_PRODUCTS, FETCH_DEPARTMENT_PAGE_PRODUCTS,
+    FETCH_CATEGORY_PAGINATION_PRODUCTS, FETCH_DEPARTMENT_PAGINATION_PRODUCTS
+} from '../action/types';
 
 const initialState = {
     items: [],
@@ -24,6 +28,29 @@ const productsReducer = (state = initialState, action) => {
                 ...state,
                 items: action.payload
             }
+
+        case FETCH_DEPARTMENT_PAGE_PRODUCTS:
+            return {
+                ...state,
+                items: action.payload
+            }
+
+        case FETCH_CATEGORY_PAGE_PRODUCTS:
+            return {
+                ...state,
+                items: action.payload
+            }
+        case FETCH_CATEGORY_PAGINATION_PRODUCTS:
+            return {
+                ...state,
+                items: action.payload
+            }
+        case FETCH_DEPARTMENT_PAGINATION_PRODUCTS:
+            return {
+                ...state,
+                items: action.payload
+            }
+
 
 
         default: return state;

@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import DetailsModal from './details-modal'
 import './shirt-list-item.css';
 
-class ShirtListItem extends Component{
+class ShirtListItem extends Component {
 
     state = { show: false }
 
@@ -14,21 +14,26 @@ class ShirtListItem extends Component{
     hideModal = () => {
         this.setState({ show: false })
     }
-    render(){
+    render() {
         return (
             <div className='product-list-item'>
-                <div>
-                    <h10 className="title">{this.props.product.name}</h10>
-                    <img
-                    width='40%'
-                    height={70}
-                    title={this.props.product.name}
-                    src={`/products/${this.props.product.image}`}
-                    onClick={ this.showModal } 
-                    />
-                    <button className="priceButtons">{this.props.product.price}</button>
-                    <DetailsModal show={ this.state.show } handleClose={ this.hideModal } product={ this.props.product}/>
+                <div className="image_wrapper">
+                    <div className="list_wrapper">
+                        <img
+                            title={this.props.product.name}
+                            src={`/products/${this.props.product.image}`}
+                            onClick={this.showModal}
+                        />
+                        <div className="title2">{this.props.product.name}</div>
+                        <div className="priceButtons">${this.props.product.price}</div>
+                    </div>
+                    <div className="item_details" onClick={this.showModal}>
+                        <h10 className="title">{this.props.product.name}</h10>
+                        <label className="priceButtons">${this.props.product.price}</label>
+                    <button className="addButton">Add To Cart</button>
+                    </div>
                 </div>
+                <DetailsModal show={this.state.show} handleClose={this.hideModal} product={this.props.product} />
             </div>
         )
     }

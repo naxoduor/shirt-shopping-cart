@@ -1023,7 +1023,7 @@ BEGIN
 END$$
 
 -- Create shopping_cart_remove_product stored procedure
-CREATE PROCEDURE shopping_cart_remove_product(IN inItemId INT)
+CREATE PROCEDURE shopping_cart_remove_product(IN inItemId VARCHAR(255))
 BEGIN
   DELETE FROM shopping_cart WHERE item_id = inItemId;
 END$$
@@ -1031,7 +1031,7 @@ END$$
 -- Create shopping_cart_get_products stored procedure
 CREATE PROCEDURE shopping_cart_get_products(IN inCartId CHAR(32))
 BEGIN
-  SELECT     sc.item_id, p.name, sc.attributes,
+  SELECT     sc.item_id, p.name, p.image, sc.attributes,
              COALESCE(NULLIF(p.discounted_price, 0), p.price) AS price,
              sc.quantity,
              COALESCE(NULLIF(p.discounted_price, 0),
