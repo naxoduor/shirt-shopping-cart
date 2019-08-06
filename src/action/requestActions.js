@@ -7,7 +7,7 @@ import {
     CATEGORY_OR_PRODUCT_ITEMS_NUMBER, FETCH_DEPARTMENT_PAGE_PRODUCTS,
     FETCH_CATEGORY_PAGE_PRODUCTS, SIGNED_UP_LOCALLY, FETCH_CATEGORY_PAGINATION_PRODUCTS,
     FETCH_DEPARTMENT_PAGINATION_PRODUCTS, UPDATE_CUSTOMER_ID, FETCH_SHIPPING_REGIONS, 
-    FETCH_SHIPPING_INFO
+    FETCH_SHIPPING_INFO, UPDATE_CATEGORYID, UPDATE_DEPARTMENTID, UPDATE_SHIPPING_ID
 } from './types'
 
 export const fetchCatalogueProducts = (productsurl) => dispatch => {
@@ -47,22 +47,38 @@ export const fetchCategoriesByDepartment = (departmentcategoriesurl) => dispatch
         }))
 }
 
-export const fetchProductsByDepartment = (departmentproductsurl) => dispatch => {
+export const fetchProductsByDepartment = (departmentproductsurl, id) => dispatch => {
+    console.log("the department id is")
+    console.log(id)
+    let obj = {}
+    obj.department_id = id
     axios.get(departmentproductsurl)
         .then(res => res.data)
         .then(products => dispatch({
             type: FETCH_PRODUCTS_BY_DEPARTMENT,
             payload: products
-        }))
+        }),
+            dispatch({
+                type: UPDATE_DEPARTMENTID,
+                payload: obj
+            }));
 }
 
-export const fetchProductsByCategory = (productsurl) => dispatch => {
+export const fetchProductsByCategory = (productsurl,  id) => dispatch => {
+
+    let obj = {}
+    obj.category_id = id
     axios.get(productsurl)
         .then(res => res.data)
         .then(products => dispatch({
             type: FETCH_PRODUCTS_BY_CATEGORY,
             payload: products
-        }))
+        }),
+        dispatch({
+            type: UPDATE_CATEGORYID,
+            payload:obj
+        })
+    )
 }
 
 export const generateUniqueCartId = (carturl) => dispatch => {
@@ -224,5 +240,20 @@ export const fetchShippingInformation = (shipping_id) => dispatch => {
         }))
 }
 
+export const updateShippingId = (shipping_id) => dispatch => {
+    let obj = {}
+    obj.shippingId = shipping_id
+    dispatch({
+        type: UPDATE_SHIPPING_ID,
+        payload: obj
+    })
+}
 
 
+export const createOrder = (order) => dispatch => {
+    console.log(order)
+    axios.post('http://127.0.0.1:8080/orders', { order })
+        .then(res => {
+            console.log(res)
+        })
+}

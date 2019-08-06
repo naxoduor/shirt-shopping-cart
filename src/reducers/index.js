@@ -13,6 +13,8 @@ import { firebaseReducer } from 'react-redux-firebase'
 import signInAndUpReducer from './signinandupreducer';
 import shippingRegionsReducer from './shippingregionsreducer'
 import shippingInfoReducer from './shippinginforeducer'
+import idsReducer from './categoriesdepartmentidreducer'
+import shippingIdReducer from  './shippingidreducer'
 
 
 export default combineReducers({
@@ -24,9 +26,11 @@ export default combineReducers({
     totalItems: totalItemsReducer,
     signing:  signInAndUpReducer,
     customer: customerReducer,
-    customerid: customerIdReducer,
+    customerId: customerIdReducer,
     shippingRegions: shippingRegionsReducer,
     shippingInfo: shippingInfoReducer,
+    selectedId: idsReducer,
+    shippingId: shippingIdReducer,
     auth: authReducer,
     firebase: firebaseReducer
 })

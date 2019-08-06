@@ -31,25 +31,11 @@ class ShirtList extends Component {
 
     }
 
-    setDepartmentIdTrue = (id) => {
-        console.log("set department id true called")
-        console.log(id)
-        this.setState({ isDepartmentId: true, isCartegoryId: false, id:id })
-        console.log(this.state.isDepartmentId)
-    }
-
-    setCategoryIdTrue = (id) => {
-        console.log("Set category id true called")
-        console.log(id)
-        this.setState({ isCartegoryId: true, isDepartmentId: false, id: id })
-    }
     handleClick = (event) =>{
         event.preventDefault()
-        console.log("we clicked handleClick")
-        console.log(this.state.isCartegoryId)
-        console.log(this.state.isDepartmentId)
-        console.log(event.target.id)
         let currentPage = parseInt(event.target.id) - 1
+        console.log("the current page is")
+        console.log(currentPage)
         let productsPerPage = 8
         let productDescriptionLength = 30
         let startItem = currentPage * productsPerPage
@@ -58,16 +44,16 @@ class ShirtList extends Component {
         params.productsPerPage = productsPerPage
         params.startItem = startItem
 
-        if (this.state.isDepartmentId) {
-            let id = this.state.id
+        if (this.props.selectedId.items.department_id) {
+            let id = this.props.selectedId.items.department_id
             params.department_id = id
             console.log(params)
             var productsurl = "http://127.0.0.1:8080/products/inDepartment/pagination/*" + id;
             this.props.fetchDepartmentPaginationProducts(productsurl, params)
         }
 
-        if (this.state.isCartegoryId) {
-            let id = this.state.id
+        if (this.props.selectedId.items.category_id) {
+            let id = this.props.selectedId.items.category_id
             params.category_id = id
             let productsurl = "http://127.0.0.1:8080/products/inCategory/pagination/*" + id
             this.props.fetchCategoryPaginationProducts(productsurl, params)
@@ -120,8 +106,7 @@ class ShirtList extends Component {
                 </div>
                 <div>
                     <div className="menu">
-                        <DepartmentList showDepartmentId={this.setDepartmentIdTrue}
-                            showCategoryId={this.setCategoryIdTrue} />
+                        <DepartmentList />
                         <div><button onClick={this.displayCart}>View Cart</button></div>
                     </div>
                     <div className="product-listing">
@@ -138,7 +123,8 @@ class ShirtList extends Component {
 
 const mapStateToProps = state => ({
     products: state.products,
-    totalItems: state.totalItems
+    totalItems: state.totalItems,
+    selectedId: state.selectedId
 })
 
 const mapDispatchToProps = (dispatch) => {
