@@ -4,7 +4,11 @@ import ShirtListItem from './shirt-list-item'
 import DepartmentList from '../departments/departmentlist'
 import Cart from '../cart'
 import localStorage from 'local-storage'
-import { fetchCartItems, fetchCategoryPaginationProducts, fetchDepartmentPaginationProducts } from '../../action/requestActions'
+import {
+    fetchCartItems, fetchCategoryPaginationProducts,
+    fetchDepartmentPaginationProducts, fetchCartTotalAmount, 
+    searchProducts
+} from '../../action/requestActions'
 import './index.css'
 class ShirtList extends Component {
 
@@ -12,16 +16,22 @@ class ShirtList extends Component {
         super(props)
         this.state = {
             showCart: false,
-            isCartegoryId: false,
-            isDepartmentId: false,
-            id: ""
+            id: "",
         }
     }
 
-    displayCart = () => {
+    handleChange = (event) => {
+        this.setState({
+            [event.target.name]: event.target.value
+        })
+    }
 
+    
+    displayCart = () => {
         let carturl = "http://127.0.0.1:8080/shoppingcart/?cart_id=" + localStorage.get("cartId");
+        let cartamounturl = "http://127.0.0.1:8080/shoppingcart/totalamount/?cart_id=" + localStorage.get("cartId");
         this.props.fetchCartItems(carturl)
+        this.props.fetchCartTotalAmount(cartamounturl)
         console.log("set state to true")
         this.setState({ showCart: true })
     }
@@ -31,7 +41,7 @@ class ShirtList extends Component {
 
     }
 
-    handleClick = (event) =>{
+    handleClick = (event) => {
         event.preventDefault()
         let currentPage = parseInt(event.target.id) - 1
         console.log("the current page is")
@@ -130,8 +140,9 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = (dispatch) => {
     return {
         fetchCartItems: (carturl) => dispatch(fetchCartItems(carturl)),
-        fetchCategoryPaginationProducts: (productsurl, params) => dispatch(fetchCategoryPaginationProducts(productsurl,params)),
-        fetchDepartmentPaginationProducts: (productsurl, params) => dispatch(fetchDepartmentPaginationProducts(productsurl, params))   
+        fetchCartTotalAmount: (cartamounturl) => dispatch(fetchCartTotalAmount(cartamounturl)),
+        fetchCategoryPaginationProducts: (productsurl, params) => dispatch(fetchCategoryPaginationProducts(productsurl, params)),
+        fetchDepartmentPaginationProducts: (productsurl, params) => dispatch(fetchDepartmentPaginationProducts(productsurl, params)),
     }
 }
 

@@ -7,7 +7,8 @@ import {
     CATEGORY_OR_PRODUCT_ITEMS_NUMBER, FETCH_DEPARTMENT_PAGE_PRODUCTS,
     FETCH_CATEGORY_PAGE_PRODUCTS, SIGNED_UP_LOCALLY, FETCH_CATEGORY_PAGINATION_PRODUCTS,
     FETCH_DEPARTMENT_PAGINATION_PRODUCTS, UPDATE_CUSTOMER_ID, FETCH_SHIPPING_REGIONS, 
-    FETCH_SHIPPING_INFO, UPDATE_CATEGORYID, UPDATE_DEPARTMENTID, UPDATE_SHIPPING_ID
+    FETCH_SHIPPING_INFO, UPDATE_CATEGORYID, UPDATE_DEPARTMENTID, UPDATE_SHIPPING_ID,
+    FETCH_SEARCH_PRODUCTS
 } from './types'
 
 export const fetchCatalogueProducts = (productsurl) => dispatch => {
@@ -18,6 +19,16 @@ export const fetchCatalogueProducts = (productsurl) => dispatch => {
             type: FETCH_CATALOGUE_PRODUCTS,
             payload: products
         }))
+}
+
+export const searchProducts = (searchurl, params) => dispatch => {
+
+    axios.post(searchurl, {params})
+    .then(res => res.data)
+    .then(products => dispatch({
+        type: FETCH_SEARCH_PRODUCTS,
+        payload:products
+    }))
 }
 
 export const fetchDepartments = (departmentsurl) => dispatch => {
@@ -177,17 +188,16 @@ export const signupUser = (user) => dispatch => {
         }))
 }
 
-export const signinUser = (email) => dispatch => {
-    console.log("sign in the user")
-    console.log(email)
-    let customer = {}
-    customer.email = email
+export const signinUser = (customer) => dispatch => {
+    let customerList=[]
     axios.post('http://127.0.0.1:8080/customers/login', { customer })
-        .then((res) => res.data)
-        .then(customerId => dispatch({
-            type: UPDATE_CUSTOMER_ID,
-            payload: customerId
-        }))
+        .then((res) => {
+            customerList.push({customer_id:res.data.user.customer_id})
+            dispatch({
+                type: UPDATE_CUSTOMER_ID,
+                payload: customerList
+            })  
+        })
 }
 
 

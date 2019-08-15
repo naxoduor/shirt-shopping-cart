@@ -122,7 +122,7 @@ CREATE TABLE `customer` (
   `customer_id`        INT           NOT NULL AUTO_INCREMENT,
   `name`               VARCHAR(50)   NOT NULL,
   `email`              VARCHAR(100)  NOT NULL,
-  `password`           VARCHAR(50)   NOT NULL,
+  `password`           VARCHAR(200)   NOT NULL,
   `credit_card`        TEXT,
   `address_1`          VARCHAR(100),
   `address_2`          VARCHAR(100),
@@ -593,7 +593,7 @@ CREATE PROCEDURE catalog_search(
 BEGIN
   IF inAllWords = "on" THEN
     PREPARE statement FROM
-      "SELECT   product_id, name,
+      "SELECT   product_id, name, image,
                 IF(LENGTH(description) <= ?,
                    description,
                    CONCAT(LEFT(description, ?),
@@ -607,7 +607,7 @@ BEGIN
        LIMIT    ?, ?";
   ELSE
     PREPARE statement FROM
-      "SELECT   product_id, name,
+      "SELECT   product_id, name, image,
                 IF(LENGTH(description) <= ?,
                    description,
                    CONCAT(LEFT(description, ?),

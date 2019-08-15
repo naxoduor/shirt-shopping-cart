@@ -65,8 +65,9 @@ class App extends Component {
     if (auth.uid) {
       console.log("user authentication id has been found")
       if (!this.state.loggedin) {
+        let customer={email:auth.email}
         console.log("login the user")
-        this.props.signinUser(auth.email)
+        this.props.signinUser(customer)
         this.setState({ loggedin: true })
       }
     }
@@ -89,11 +90,10 @@ class App extends Component {
                 <Nav.Link className={auth.uid ? '' : 'hidden'} href="#" tag={ReactLink} to="/" onClick={this.props.signOut}>Log Out</Nav.Link>
                 <Nav.Link className={auth.uid ? 'hidden' : ''} href="#" tag={ReactLink} to="/" onClick={this.showSignInModal}>Sign In</Nav.Link>
                 <Nav.Link className={auth.uid ? 'hidden' : ''} href="#" tag={ReactLink} to="/" onClick={this.showSignUpModal}>Sign Up</Nav.Link>
-                <Nav.Link className="checkoutlink" href="#"><Link tag={ReactLink} to="/checkout">Checkout</Link></Nav.Link>
               </Nav>
             </Navbar>
             <SignIn show={this.state.showSignInModal} handleClose={this.hideSignInModal} />
-            <SignUp show={this.state.showSignUpModal} handleClose={this.hideSignUpModal} />
+            <SignUp show={this.state.showSignUpModal} handleClose={this.hideSignUpModal} displaySignIn={this.showSignInModal}/>
             <Switch>
               <Route exact path='/' component={HomePage} />
               <Route exact path='/checkout' render={() => <CheckOut />} />
@@ -109,7 +109,7 @@ const mapDispatchToProps = (dispatch) => {
   return {
     signOut: () => dispatch(signOut()),
     signupUser: (user) => dispatch(signupUser(user)),
-    signinUser: (email) => dispatch(signinUser(email)),
+    signinUser: (customer) => dispatch(signinUser(customer)),
     generateUniqueCartId: (carturl) => dispatch(generateUniqueCartId(carturl)),
     fetchShippingRegions: () => dispatch(fetchShippingRegions())
   }
