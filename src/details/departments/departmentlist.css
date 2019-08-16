@@ -1,0 +1,47 @@
+.departmentListItem{
+    text-decoration: none;
+    font-size: 20px;
+    text-align: left;
+    list-style: none;
+    color: grey;
+}
+
+.categoryListItem{
+    color: 808080;
+}
+.buttons{
+    width: 155px;
+    height: 30px;
+    background-color: rgb(240,240,240);    ;
+    color: 808080;
+    text-align: center;
+    color: 808080;
+    font-size: 10px;
+    margin-left: 10px;
+    margin-top: 3px;
+    cursor: pointer;
+    border-radius: 5px;
+    vertical-align: middle;
+    padding: 0px;
+}
+
+.coloredbuttons{
+    padding: 5px;
+    width: 155px;
+    height: 30px;
+    background-color: rgb(85, 83, 84);    ;
+    color: 808080;
+    text-align: center;
+    color: 808080;
+    padding: 10px 20px;
+    text-align: center;
+    font-size: 10px;
+    margin-left: 10px;
+    margin-top: 3px;
+    cursor: pointer;
+    border-radius: 5px;
+    display: table-cell;
+    vertical-align: middle;
+    padding: 0px;
+}
+

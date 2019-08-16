@@ -1,0 +1,47 @@
+.contents{
+  background-color: rgb(240,240,240);
+}
+.product-listing{
+    display:flex;
+    flex: 1;
+    flex-wrap: wrap;
+    flex-direction: row;
+}
+
+.menu{
+    background-color: white;
+    width: 17%;
+    float: left;
+    margin-top: 20px;
+    margin-left: 10px;
+    border-radius: 5px;
+}
+
+#page-numbers {
+    list-style: none;
+    display: flex;
+    clear: both;
+    margin: auto;
+    width: 50%;
+    margin-top: 10px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  #page-numbers > li {
+    margin-right: 1.5em;
+    color: blue;
+    user-select: none;
+    cursor: pointer;
+  }
+
+  .viewcart {
+    width:80%;
+    height: auto;
+    border-radius: 5px;
+    background: rgb(180, 15, 56);
+    margin-top: 3px;
+    font-size: 15px;
+    margin-left: 10px;
+  }
+  
