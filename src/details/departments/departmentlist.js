@@ -138,7 +138,7 @@ const mapDispatchToProps = (dispatch) => {
         fetchCategoriesByDepartment: (categoriesurl, id) => dispatch(fetchCategoriesByDepartment(categoriesurl, id)),
         fetchProductsByCategory: (productsurl, id) => dispatch(fetchProductsByCategory(productsurl, id)),
         fetchTotalDepartmentItems: (totalitemsurl, id) => dispatch(fetchTotalDepartmentItems(totalitemsurl, id)),
-        fetchTotalCategoryItems: (totalitemsurl, id) => dispatch(fdetchTotalCategoryItems(totalitemsurl, id)),
+        fetchTotalCategoryItems: (totalitemsurl, id) => dispatch(fetchTotalCategoryItems(totalitemsurl, id)),
         searchProducts: (searchurl, params) => dispatch(searchProducts(searchurl, params))
     }
 }
