@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import ShirtListItem from './shirt-list-item'
 import DepartmentList from '../departments/departmentlist'
-import Cart from '../cart'
+import Cart from '../cart/index'
 import localStorage from 'local-storage'
 import {
     fetchCartItems, fetchCategoryPaginationProducts,
