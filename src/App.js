@@ -79,12 +79,12 @@ class App extends Component {
             <Navbar bg="dark" variant="dark">
               <Navbar.Brand href="#home">
                 <img
-                  src="/logo.svg"
-                  width="30"
+                  src="/images/tshirtshop.png"
+                  width="15"
                   height="30"
                   className="d-inline-block align-top"
-                  alt="React Bootstrap logo"
-                />
+                  alt="tshirt shop logo"
+                /> 
               </Navbar.Brand>
               <Nav className="ml-auto linkItems">
                 <Nav.Link className={auth.uid ? '' : 'hidden'} href="#" tag={ReactLink} to="/" onClick={this.props.signOut}>Log Out</Nav.Link>

@@ -117,12 +117,11 @@ class ShirtList extends Component {
                 <div>
                     <div className="menu">
                         <DepartmentList />
-                        <div><button onClick={this.displayCart}>View Cart</button></div>
+                        <div><button className="viewcart"onClick={this.displayCart}>View Cart</button></div>
                     </div>
                     <div className="product-listing">
                         {renderShirtProducts}
                         <Cart show={this.state.showCart} handleClose={this.hideCart} />
-
                     </div>
                 </div>
             </div>
