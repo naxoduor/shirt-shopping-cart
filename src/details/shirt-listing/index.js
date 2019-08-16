@@ -28,10 +28,11 @@ class ShirtList extends Component {
 
     
     displayCart = () => {
-        let carturl = "http://127.0.0.1:8080/shoppingcart/?cart_id=" + localStorage.get("cartId");
-        let cartamounturl = "http://127.0.0.1:8080/shoppingcart/totalamount/?cart_id=" + localStorage.get("cartId");
-        this.props.fetchCartItems(carturl)
-        this.props.fetchCartTotalAmount(cartamounturl)
+        let cart_id = localStorage.get("cartId")
+        let carturl = "http://127.0.0.1:8080/shoppingcart/?cart_id=" + cart_id;
+        let cartamounturl = "http://127.0.0.1:8080/shoppingcart/totalamount/?cart_id=" + cart_id;
+        this.props.fetchCartItems(carturl, cart_id)
+        this.props.fetchCartTotalAmount(cartamounturl, cart_id)
         console.log("set state to true")
         this.setState({ showCart: true })
     }
@@ -59,14 +60,14 @@ class ShirtList extends Component {
             params.department_id = id
             console.log(params)
             var productsurl = "http://127.0.0.1:8080/products/inDepartment/pagination/*" + id;
-            this.props.fetchDepartmentPaginationProducts(productsurl, params)
+            this.props.fetchDepartmentPaginationProducts(productsurl,id, params)
         }
 
         if (this.props.selectedId.items.category_id) {
             let id = this.props.selectedId.items.category_id
             params.category_id = id
             let productsurl = "http://127.0.0.1:8080/products/inCategory/pagination/*" + id
-            this.props.fetchCategoryPaginationProducts(productsurl, params)
+            this.props.fetchCategoryPaginationProducts(productsurl, id, params)
         }
     }
 
@@ -138,10 +139,10 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        fetchCartItems: (carturl) => dispatch(fetchCartItems(carturl)),
-        fetchCartTotalAmount: (cartamounturl) => dispatch(fetchCartTotalAmount(cartamounturl)),
-        fetchCategoryPaginationProducts: (productsurl, params) => dispatch(fetchCategoryPaginationProducts(productsurl, params)),
-        fetchDepartmentPaginationProducts: (productsurl, params) => dispatch(fetchDepartmentPaginationProducts(productsurl, params)),
+        fetchCartItems: (carturl, cart_id) => dispatch(fetchCartItems(carturl, cart_id)),
+        fetchCartTotalAmount: (cartamounturl, cart_id) => dispatch(fetchCartTotalAmount(cartamounturl, cart_id)),
+        fetchCategoryPaginationProducts: (productsurl, id, params) => dispatch(fetchCategoryPaginationProducts(productsurl, id, params)),
+        fetchDepartmentPaginationProducts: (productsurl, id, params) => dispatch(fetchDepartmentPaginationProducts(productsurl, id, params)),
     }
 }
 

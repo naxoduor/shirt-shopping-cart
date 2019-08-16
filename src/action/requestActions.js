@@ -13,6 +13,7 @@ import {
 
 export const fetchCatalogueProducts = (productsurl) => dispatch => {
 
+    let productsurl="http://104.248.73.139:8080/products"
     axios.get(productsurl)
         .then(res => res.data)
         .then(products => dispatch({
@@ -23,6 +24,7 @@ export const fetchCatalogueProducts = (productsurl) => dispatch => {
 
 export const searchProducts = (searchurl, params) => dispatch => {
 
+let searchurl="http://104.248.73.139:8080/products/search"
     axios.post(searchurl, {params})
     .then(res => res.data)
     .then(products => dispatch({
@@ -32,6 +34,8 @@ export const searchProducts = (searchurl, params) => dispatch => {
 }
 
 export const fetchDepartments = (departmentsurl) => dispatch => {
+
+    let departmentsurl="http://104.248.73.139:8080/departments"
     axios.get(departmentsurl)
         .then(res => res.data)
         .then(departments => dispatch({
@@ -41,6 +45,8 @@ export const fetchDepartments = (departmentsurl) => dispatch => {
 }
 
 export const fetchCategories = (categoriesurl) => dispatch => {
+
+    let categoriesurl="http://104.248.73.139:8080/categories"
     axios.get(categoriesurl)
         .then(res => res.data)
         .then(categories => dispatch({
@@ -49,7 +55,9 @@ export const fetchCategories = (categoriesurl) => dispatch => {
         }))
 }
 
-export const fetchCategoriesByDepartment = (departmentcategoriesurl) => dispatch => {
+export const fetchCategoriesByDepartment = (departmentcategoriesurl, id) => dispatch => {
+
+    let departmentcategoriesurl="http://104.248.73.139:8080/categories/inDepartment/?id=" + id;
     axios.get(departmentcategoriesurl)
         .then(res => res.data)
         .then(categories => dispatch({
@@ -61,6 +69,7 @@ export const fetchCategoriesByDepartment = (departmentcategoriesurl) => dispatch
 export const fetchProductsByDepartment = (departmentproductsurl, id) => dispatch => {
     console.log("the department id is")
     console.log(id)
+    let departmentproductsurl="http://104.248.73.139:8080/products/inDepartment/?id=" + id;
     let obj = {}
     obj.department_id = id
     axios.get(departmentproductsurl)
@@ -77,6 +86,7 @@ export const fetchProductsByDepartment = (departmentproductsurl, id) => dispatch
 
 export const fetchProductsByCategory = (productsurl,  id) => dispatch => {
 
+    let productsurl="http://104.248.73.139:8080/products/inCategory/?id=" + id;
     let obj = {}
     obj.category_id = id
     axios.get(productsurl)
@@ -93,6 +103,8 @@ export const fetchProductsByCategory = (productsurl,  id) => dispatch => {
 }
 
 export const generateUniqueCartId = (carturl) => dispatch => {
+
+    let carturl="http://104.248.73.139:8080/shoppingcart/generateUniqueId"
     axios.get(carturl)
         .then(res => res.data)
         .then(cartid => {
@@ -101,6 +113,7 @@ export const generateUniqueCartId = (carturl) => dispatch => {
 }
 
 export const addToCart = (carturl, cartId, item) => dispatch => {
+    let carturl='http://104.248.73.139:8080/shoppingcart/add'
     let params = {}
     params.cartId = cartId
     params.productId = item.product_id
@@ -108,8 +121,9 @@ export const addToCart = (carturl, cartId, item) => dispatch => {
     axios.post(carturl, { params })
 }
 
-export const fetchCartItems = (carturl) => dispatch => {
+export const fetchCartItems = (carturl, cart_id) => dispatch => {
 
+    let carturl="http://104.248.73.139:8080/shoppingcart/?cart_id=" + cart_id
     console.log(carturl)
     axios.get(carturl)
         .then(res => res.data)
@@ -119,8 +133,9 @@ export const fetchCartItems = (carturl) => dispatch => {
         }))
 }
 
-export const fetchCartTotalAmount = (carturl) => dispatch => {
+export const fetchCartTotalAmount = (carturl, cart_id) => dispatch => {
 
+    let carturl="http://104.248.73.139:8080/shoppingcart/totalamount/?cart_id=" + cart_id
     axios.get(carturl)
         .then(res => res.data)
         .then(cartAmount => dispatch({
@@ -129,8 +144,9 @@ export const fetchCartTotalAmount = (carturl) => dispatch => {
         }))
 }
 
-export const fetchTotalDepartmentItems = (totalitemsurl) => dispatch => {
+export const fetchTotalDepartmentItems = (totalitemsurl, id) => dispatch => {
 
+    let totalitemsurl="http://104.248.73.139:8080/departments/totalitems/?id=" + id;
     axios.get(totalitemsurl)
         .then(res => res.data)
         .then(totalItems => dispatch({
@@ -139,7 +155,9 @@ export const fetchTotalDepartmentItems = (totalitemsurl) => dispatch => {
         }))
 }
 
-export const fetchTotalCategoryItems = (totalitemsurl) => dispatch => {
+export const fetchTotalCategoryItems = (totalitemsurl, id) => dispatch => {
+
+    let totalitemsurl="http://104.248.73.139:8080/categories/totalitems/?id=" + id;
 
     axios.get(totalitemsurl)
         .then(res => res.data)
@@ -159,8 +177,9 @@ export const fetchDepartmentPageProducts = (finalurl, params) => dispatch => {
         }))
 }
 
-export const removeCartProduct = (carturl) => dispatch => {
+export const removeCartProduct = (carturl, item_id) => dispatch => {
 
+    let carturl=`http://104.248.73.139:8080/shoppingcart/removeProduct/?item_id=${item_id}`
     console.log("remove cart product")
     axios.delete(carturl)
         .then(res => res.data)
@@ -181,7 +200,7 @@ export const fetchCategoryPageProducts = (finalurl, params) => dispatch => {
 }
 
 export const signupUser = (user) => dispatch => {
-    axios.post('http://127.0.0.1:8080/customers', { user })
+    axios.post('http://104.248.73.139:8080/customers', { user })
         .then((res) => res.data)
         .then(data => dispatch({
             type: SIGNED_UP_LOCALLY
@@ -190,7 +209,7 @@ export const signupUser = (user) => dispatch => {
 
 export const signinUser = (customer) => dispatch => {
     let customerList=[]
-    axios.post('http://127.0.0.1:8080/customers/login', { customer })
+    axios.post('http://104.248.73.139:8080/customers/login', { customer })
         .then((res) => {
             customerList.push({customer_id:res.data.user.customer_id})
             dispatch({
@@ -201,8 +220,9 @@ export const signinUser = (customer) => dispatch => {
 }
 
 
-export const fetchDepartmentPaginationProducts = (finalurl, params) => dispatch => {
+export const fetchDepartmentPaginationProducts = (finalurl, id, params) => dispatch => {
 
+    let finalurl="http://104.248.73.139:8080/products/inDepartment/pagination/*" + id
     let obj = {}
     obj.department_id = params.department_id
 
@@ -214,8 +234,9 @@ export const fetchDepartmentPaginationProducts = (finalurl, params) => dispatch 
         }))
 }
 
-export const fetchCategoryPaginationProducts = (finalurl, params) => dispatch => {
+export const fetchCategoryPaginationProducts = (finalurl, id, params) => dispatch => {
 
+    let finalurl="http://104.248.73.139:8080/products/inCategory/pagination/*" + id;
     let obj = {}
     obj.category_id = params.category_id
     axios.post(finalurl, { params })
@@ -230,7 +251,7 @@ export const fetchCategoryPaginationProducts = (finalurl, params) => dispatch =>
 export const fetchShippingRegions = () => dispatch => {
     console.log("fetching shipping regions")
 
-    axios.get('http://127.0.0.1:8080/shipping/regions/')
+    axios.get('http://104.248.73.139:8080/shipping/regions/')
         .then(res => res.data)
         .then(shippingRegions => dispatch({
             type: FETCH_SHIPPING_REGIONS,
@@ -241,7 +262,7 @@ export const fetchShippingRegions = () => dispatch => {
 export const fetchShippingInformation = (shipping_id) => dispatch => {
     console.log("fetch shipping information")
     let shipping = {}
-    let shippinginfourl=`http://127.0.0.1:8080/shipping/regions/regionId/?shipping_region_id=${shipping_id}`
+    let shippinginfourl=`http://104.248.73.139:8080/shipping/regions/regionId/?shipping_region_id=${shipping_id}`
     axios.get(shippinginfourl)
         .then(res => res.data)
         .then(shippinginfo => dispatch({
@@ -262,7 +283,7 @@ export const updateShippingId = (shipping_id) => dispatch => {
 
 export const createOrder = (order) => dispatch => {
     console.log(order)
-    axios.post('http://127.0.0.1:8080/orders', { order })
+    axios.post('http://104.248.73.139:8080/orders', { order })
         .then(res => {
             console.log(res)
         })

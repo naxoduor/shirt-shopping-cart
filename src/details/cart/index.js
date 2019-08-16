@@ -22,7 +22,7 @@ class Cart extends Component {
     e.preventDefault()
     let carturl=`http://127.0.0.1:8080/shoppingcart/removeProduct/?item_id=${item_id}`
     console.log(carturl)
-    this.props.removeCartProduct(carturl)
+    this.props.removeCartProduct(carturl, item_id)
   }
 
   render() {

@@ -13,7 +13,7 @@ class Home extends Component {
         let categoriesurl="http://127.0.0.1:8080/categories"
         this.props.fetchCatalogueProducts(catalogueurl)
         this.props.fetchDepartments(departmentsurl)
-        this.props.fetchCategories(categoriesurl)
+        //this.props.fetchCategories(categoriesurl)
     }
 
 render(){

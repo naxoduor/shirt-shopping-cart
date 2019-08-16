@@ -57,7 +57,7 @@ class DepartmentList extends Component {
 
     getDepartmentCategories(id) {
         let categoriesurl = "http://127.0.0.1:8080/categories/inDepartment/?id=" + id;
-        this.props.fetchCategoriesByDepartment(categoriesurl)
+        this.props.fetchCategoriesByDepartment(categoriesurl, id)
     }
 
     getDepartmentProducts(id) {
@@ -69,7 +69,7 @@ class DepartmentList extends Component {
 
     getDepartmentTotalItems(id) {
         let totalitemsurl = "http://127.0.0.1:8080/departments/totalitems/?id=" + id;
-        this.props.fetchTotalDepartmentItems(totalitemsurl)
+        this.props.fetchTotalDepartmentItems(totalitemsurl, id)
     }
 
     getCategoryProducts = (event, id) => {
@@ -81,7 +81,7 @@ class DepartmentList extends Component {
         let productsurl = "http://127.0.0.1:8080/products/inCategory/?id=" + id;
         let totalitemsurl = "http://127.0.0.1:8080/categories/totalitems/?id=" + id;
         this.props.fetchProductsByCategory(productsurl, id)
-        this.props.fetchTotalCategoryItems(totalitemsurl)
+        this.props.fetchTotalCategoryItems(totalitemsurl, id)
     }
 
 
@@ -135,10 +135,10 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = (dispatch) => {
     return {
         fetchProductsByDepartment: (productsurl, id) => dispatch(fetchProductsByDepartment(productsurl, id)),
-        fetchCategoriesByDepartment: (categoriesurl) => dispatch(fetchCategoriesByDepartment(categoriesurl)),
+        fetchCategoriesByDepartment: (categoriesurl, id) => dispatch(fetchCategoriesByDepartment(categoriesurl, id)),
         fetchProductsByCategory: (productsurl, id) => dispatch(fetchProductsByCategory(productsurl, id)),
-        fetchTotalDepartmentItems: (totalitemsurl) => dispatch(fetchTotalDepartmentItems(totalitemsurl)),
-        fetchTotalCategoryItems: (totalitemsurl) => dispatch(fetchTotalCategoryItems(totalitemsurl)),
+        fetchTotalDepartmentItems: (totalitemsurl, id) => dispatch(fetchTotalDepartmentItems(totalitemsurl, id)),
+        fetchTotalCategoryItems: (totalitemsurl, id) => dispatch(fdetchTotalCategoryItems(totalitemsurl, id)),
         searchProducts: (searchurl, params) => dispatch(searchProducts(searchurl, params))
     }
 }
