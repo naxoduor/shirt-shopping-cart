@@ -28,7 +28,7 @@ class CheckOutForm extends Component {
 
         const {email, firstName} = this.state
     
-    axios.post("http://104.248.73.139:3001/api/form",{
+    axios.post("http://127.0.0.1:3001/api/form",{
         order: {
             firstName,
             email,
