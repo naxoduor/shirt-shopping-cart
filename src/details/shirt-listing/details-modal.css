@@ -105,27 +105,27 @@ padding: 10px 30px;
 
 .sizeButton {
   background-color: brown;
-  width: 135px;
+  width: 125px;
   height: 40px;
   border: 2px solid brown;
   color: white;
   padding: 10px 20px;
   display: inline-block;
   font-size: 10px;
-  margin-left: 16px;
+  margin-left: 14px;
   cursor: pointer;
   border-radius: 5px;
 }
 
 .nsizeButton {
   background-color: C0C0C0;
-  width: 135px;
+  width: 125px;
   height:40px;
   color: 808080;
   padding: 10px 20px;
   display: inline-block;
   font-size: 10px;
-  margin-left: 16px;
+  margin-left: 14px;
   cursor: pointer;
   border-radius: 5px;
 }
@@ -136,14 +136,14 @@ padding: 10px 30px;
 
 .colorButton {
   background-color: brown;
-  width: 67px;
+  width: 60px;
   height: 35px;
   border: 2px solid brown;
   color: white;
   text-align: center;
   display: inline-block;
   font-size: 10px;
-  margin-left: 15px;
+  margin-left: 12px;
   cursor: pointer;
   border-radius: 5px;
 }
@@ -151,12 +151,12 @@ padding: 10px 30px;
 .ncolorButton {
   background-color: C0C0C0;
   text-align: center;
-  width:67px;
+  width:60px;
   height:35px;
   color: 808080;
   display: inline-block;
   font-size: 10px;
-  margin-left: 15px;
+  margin-left: 12px;
   cursor: pointer;
   border-radius: 5px;
 }
