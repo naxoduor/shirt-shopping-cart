@@ -33,7 +33,6 @@ class ShirtList extends Component {
         let cartamounturl = "http://127.0.0.1:8080/shoppingcart/totalamount/?cart_id=" + cart_id;
         this.props.fetchCartItems(carturl, cart_id)
         this.props.fetchCartTotalAmount(cartamounturl, cart_id)
-        console.log("set state to true")
         this.setState({ showCart: true })
     }
 
@@ -45,8 +44,6 @@ class ShirtList extends Component {
     handleClick = (event) => {
         event.preventDefault()
         let currentPage = parseInt(event.target.id) - 1
-        console.log("the current page is")
-        console.log(currentPage)
         let productsPerPage = 8
         let productDescriptionLength = 30
         let startItem = currentPage * productsPerPage
@@ -58,7 +55,6 @@ class ShirtList extends Component {
         if (this.props.selectedId.items.department_id) {
             let id = this.props.selectedId.items.department_id
             params.department_id = id
-            console.log(params)
             var productsurl = "http://127.0.0.1:8080/products/inDepartment/pagination/*" + id;
             this.props.fetchDepartmentPaginationProducts(productsurl,id, params)
         }

@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
+import localStorage from 'local-storage'
 import { connect } from 'react-redux'
-import { removeCartProduct } from '../../action/requestActions';
+import { removeCartProduct, addToCart } from '../../action/requestActions';
 import './cart.css'
 import { withRouter } from "react-router-dom";
 
@@ -18,6 +19,15 @@ class Cart extends Component {
     this.props.history.push('/checkout')
     this.props.handleClose()
   }
+
+  handleAddProduct = (event, product) => {
+    event.preventDefault()
+    let carturl='http://104.248.73.139:8080/shoppingcart/add'
+    let quantity = event.target.value
+    let cartId= localStorage.get("cartId")
+    console.log(carturl, quantity, cartId)
+    this.props.addToCart(carturl, cartId, product, quantity)
+  }
   removeCartProduct = (e, item_id) => {
     e.preventDefault()
     let carturl=`http://127.0.0.1:8080/shoppingcart/removeProduct/?item_id=${item_id}`
@@ -28,11 +38,6 @@ class Cart extends Component {
 
   render() {
     let items = this.props.cartItems.items
-    items.forEach((product)=> {
-      console.log(product.attributes)
-      console.log(product.products)
-    })
-    console.log(this.props.cartItems.products)
     const showHideClassName = this.props.show ? "cartmodal display-block" : "cartmodal display-none";
     return <div className={ showHideClassName }>
     <h>CART ITEMS</h>
@@ -66,7 +71,7 @@ class Cart extends Component {
               </td>
               <td>{product.attributes}</td>
               <td>{product.price}</td>
-              <td>{product.quantity}</td>
+              <td><input type="number" min="0" max="10" step="1" value={product.quantity} /></td>
               <td>{product.price * product.quantity}</td>
               <td><span className="rmvItem" onClick={(e) => this.removeCartProduct(e, product.item_id)}>&times;</span></td>
             </tr>)
@@ -89,6 +94,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     removeCartProduct: (carturl, item_id) => dispatch(removeCartProduct(carturl, item_id)),
+    addToCart: (carturl, cartId, product, quantity) => dispatch(addToCart(carturl, cartId, product, quantity))
   }
 }
 

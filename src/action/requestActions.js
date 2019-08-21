@@ -113,12 +113,14 @@ export const generateUniqueCartId = (carturl) => dispatch => {
         })
 }
 
-export const addToCart = (carturl, cartId, item) => dispatch => {
+export const addToCart = (carturl, cartId, item, quantity) => dispatch => {
     let carturl='http://104.248.73.139:8080/shoppingcart/add'
     let params = {}
     params.cartId = cartId
     params.productId = item.product_id
     params.attributes = `Color is ${item.color} and size is ${item.size}`
+    params.quantity = quantity
+    console.log(params)
     axios.post(carturl, { params })
 }
 

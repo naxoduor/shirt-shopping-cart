@@ -1,6 +1,4 @@
 import React, { Component } from 'react'
-import Row from 'react-bootstrap/Row'
-import Col from 'react-bootstrap/Col'
 import localStorage from 'local-storage'
 import { connect } from 'react-redux'
 import { addToCart } from '../../action/requestActions'
@@ -11,11 +9,20 @@ class DetailsModal extends Component {
         super()
         this.state = {
             color: 'W',
-            size: 'S'
+            size: 'S',
+            quantity: '2'
         }
     }
 
+    handleQuantityClick = (event) => {
+        event.preventDefault()
+        this.setState({
+            quantity:parseInt(event.target.value)
+        })
+    }
+
     handleColorClick = (event) => {
+        event.preventDefault()
         this.setState({
             color: event.target.id
         })
@@ -23,6 +30,7 @@ class DetailsModal extends Component {
     }
 
     handleSizeClick = (event) => {
+        event.preventDefault()
         this.setState({
             size: event.target.id
         })
@@ -30,21 +38,20 @@ class DetailsModal extends Component {
     }
 
     handleAddToCart = (event, product) => {
+        event.preventDefault()
+        let quantity= this.state.quantity
         let carturl = 'http://127.0.0.1:8080/shoppingcart/add'
         let cartId = localStorage.get("cartId")
-        console.log(cartId)
-        this.props.addToCart(carturl, cartId, product)
+        this.props.addToCart(carturl, cartId, product, quantity)
         this.props.handleClose()
     }
 
     render() {
-        console.log("we have the modal action")
         const showHideClassName = this.props.show ? "modal display-block" : "modal display-none";
-        console.log(showHideClassName)
         return (
             <div className={showHideClassName}>
                 <div className="modal-main">
-                    <span className="close" onClick={this.props.handleClose}>&times;</span>
+                <span className="close" onClick={this.props.handleClose}>&times;</span>
                     <div className="left_frame">
                         <div className='right_images'>
                             <div className='modalImage'>
@@ -70,6 +77,8 @@ class DetailsModal extends Component {
                             <div className='product-title'>{this.props.product.name}</div>
                             <div className='product-price'>${this.props.product.price}</div>
                             <div className='product-description'>{this.props.product.description}</div>
+                            <label>Quantity</label>
+                            <input className="quainput" type="number" min={0} max={10} placeholder="1" step={1} onClick={(e) => this.handleQuantityClick(e)}/>
                             <label className="label">size</label>
                             <div className='sizebs'>
                                     <button id='S' className={this.state.size === 'S' ? "sizeButton small" : "nsizeButton small"} onClick={this.handleSizeClick} >S</button>
@@ -107,7 +116,7 @@ class DetailsModal extends Component {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        addToCart: (carturl, cartId, product) => dispatch(addToCart(carturl, cartId, product))
+        addToCart: (carturl, cartId, product, quantity) => dispatch(addToCart(carturl, cartId, product, quantity))
     }
 }
 
