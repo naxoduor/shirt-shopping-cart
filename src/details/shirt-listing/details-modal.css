@@ -105,7 +105,7 @@ padding: 10px 30px;
 
 .sizeButton {
   background-color: brown;
-  width: 140px;
+  width: 135px;
   height: 40px;
   border: 2px solid brown;
   color: white;
@@ -119,7 +119,7 @@ padding: 10px 30px;
 
 .nsizeButton {
   background-color: C0C0C0;
-  width: 140px;
+  width: 135px;
   height:40px;
   color: 808080;
   padding: 10px 20px;
@@ -136,8 +136,8 @@ padding: 10px 30px;
 
 .colorButton {
   background-color: brown;
-  width: 71px;
-  height: 40px;
+  width: 67px;
+  height: 35px;
   border: 2px solid brown;
   color: white;
   text-align: center;
@@ -151,8 +151,8 @@ padding: 10px 30px;
 .ncolorButton {
   background-color: C0C0C0;
   text-align: center;
-  width:71px;
-  height:40px;
+  width:67px;
+  height:35px;
   color: 808080;
   display: inline-block;
   font-size: 10px;
