@@ -42,9 +42,10 @@ class DetailsModal extends Component {
         let quantity= this.state.quantity
         let carturl = 'http://127.0.0.1:8080/shoppingcart/add'
         let cartId = localStorage.get("cartId")
+        let cart_id = cartId
         let cartshoppingurl = "http://127.0.0.1:8080/shoppingcart/?cart_id=" + cart_id;
         this.props.addToCart(carturl, cartId, product, quantity)
-        this.props.fetchCartItems(cartshoppingurl, cart_Id)
+        this.props.fetchCartItems(cartshoppingurl, cart_id)
         this.props.handleClose()
     }
 
@@ -116,7 +117,7 @@ class DetailsModal extends Component {
 const mapDispatchToProps = (dispatch) => {
     return {
         addToCart: (carturl, cartId, product, quantity) => dispatch(addToCart(carturl, cartId, product, quantity)),
-        fetchCartItems: (cartshoppingurl, cart_Id) => dispatch(fetchCartItems(cartshoppingurl, cart_Id))
+        fetchCartItems: (cartshoppingurl, cart_id) => dispatch(fetchCartItems(cartshoppingurl, cart_id))
     }
 }
 
