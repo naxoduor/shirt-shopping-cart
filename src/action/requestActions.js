@@ -24,7 +24,7 @@ export const fetchCatalogueProducts = (productsurl) => dispatch => {
 
 export const searchProducts = (searchurl, params) => dispatch => {
 
-let searchurl="http://127.0.0.:8080/products/search"
+let searchurl="http://104.248.73.139:8080/products/search"
      axios.post(searchurl, {params})
     .then(res => res.data)
     .then(products => dispatch({

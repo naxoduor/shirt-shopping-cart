@@ -10,7 +10,7 @@ class DetailsModal extends Component {
         this.state = {
             color: 'W',
             size: 'S',
-            quantity: '2'
+            quantity: ''
         }
     }
 
@@ -39,13 +39,11 @@ class DetailsModal extends Component {
 
     handleAddToCart = (event, product) => {
         event.preventDefault()
+        console.log(this.state.quantity)
         let quantity= this.state.quantity
         let carturl = 'http://127.0.0.1:8080/shoppingcart/add'
         let cartId = localStorage.get("cartId")
-        let cart_id = cartId
-        let cartshoppingurl = "http://127.0.0.1:8080/shoppingcart/?cart_id=" + cart_id;
         this.props.addToCart(carturl, cartId, product, quantity)
-        this.props.fetchCartItems(cartshoppingurl, cart_id)
         this.props.handleClose()
     }
 
