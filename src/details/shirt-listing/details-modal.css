@@ -80,10 +80,12 @@ padding: 10px 30px;
   display: flex;
   flex-wrap: wrap;
   flex-direction: column;
+  width: 100%;
 }
 .quainput{
-  width: 20%;
+  width: 30%;
   border: 1px solid grey;
+  border-radius: 3px;
 }
 .product-title{
   font-size: 28px;
@@ -103,31 +105,46 @@ padding: 10px 30px;
   font-family: sans-serif;
 }
 
+.sizebs {
+  width: 100%;
+  display:flex;
+  flex: 1;
+  flex-wrap: wrap;
+  flex-direction: row;
+
+}
+
 .sizeButton {
   background-color: brown;
-  width: 125px;
   height: 40px;
+  width: 18%;
+  margin: auto;
   border: 2px solid brown;
   color: white;
   padding: 10px 20px;
-  display: inline-block;
   font-size: 10px;
-  margin-left: 14px;
   cursor: pointer;
   border-radius: 5px;
 }
 
 .nsizeButton {
   background-color: C0C0C0;
-  width: 125px;
+  width: 18%;
+  margin: auto;
   height:40px;
   color: 808080;
   padding: 10px 20px;
-  display: inline-block;
   font-size: 10px;
-  margin-left: 14px;
   cursor: pointer;
   border-radius: 5px;
+}
+
+.moColorButtons{
+  width: 100%;
+  display:flex;
+  flex: 1;
+  flex-wrap: wrap;
+  flex-direction: row;
 }
 
 .label{
@@ -136,14 +153,14 @@ padding: 10px 30px;
 
 .colorButton {
   background-color: brown;
-  width: 60px;
+  width: 10%;
+  margin: auto;
   height: 35px;
   border: 2px solid brown;
   color: white;
   text-align: center;
   display: inline-block;
   font-size: 10px;
-  margin-left: 12px;
   cursor: pointer;
   border-radius: 5px;
 }
@@ -151,12 +168,12 @@ padding: 10px 30px;
 .ncolorButton {
   background-color: C0C0C0;
   text-align: center;
-  width:60px;
+  width: 10%;
+  margin: auto;
   height:35px;
   color: 808080;
   display: inline-block;
   font-size: 10px;
-  margin-left: 12px;
   cursor: pointer;
   border-radius: 5px;
 }

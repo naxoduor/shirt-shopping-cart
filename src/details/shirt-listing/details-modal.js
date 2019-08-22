@@ -78,7 +78,7 @@ class DetailsModal extends Component {
                             <div className='product-price'>${this.props.product.price}</div>
                             <div className='product-description'>{this.props.product.description}</div>
                             <label>Quantity</label>
-                            <input className="quainput" type="number" min={0} max={10} placeholder="1" step={1} onClick={(e) => this.handleQuantityClick(e)}/>
+                            <input className="quainput" type="number" min={0} max={10} defaultValue="1" step={1} onClick={(e) => this.handleQuantityClick(e)}/>
                             <label className="label">size</label>
                             <div className='sizebs'>
                                     <button id='S' className={this.state.size === 'S' ? "sizeButton small" : "nsizeButton small"} onClick={this.handleSizeClick} >S</button>
@@ -88,10 +88,8 @@ class DetailsModal extends Component {
                                     <button id='XXL' className={this.state.size === 'XXL' ? "sizeButton xxlarge" : "nsizeButton xxlarge"} onClick={this.handleSizeClick} >XXL</button>
                                 </div>
                             </div>
-
+                            <label className='label'>Color</label><br/>
                             <div className='moColorButtons'>
-                                <div>
-                                <label className='label'>Color</label><br/>
                                     <button id='white' className={this.state.color === 'white' ? "colorButton small" : "ncolorButton small"} onClick={this.handleColorClick}>white</button>
                                     <button id='black' className={this.state.color === 'black' ? "colorButton small" : "ncolorButton small"} onClick={this.handleColorClick}>black</button>
                                     <button id='red' className={this.state.color === 'red' ? "colorButton small" : "ncolorButton small"} onClick={this.handleColorClick}>red</button>
@@ -101,7 +99,6 @@ class DetailsModal extends Component {
                                     <button id='blue' className={this.state.color === 'blue' ? "colorButton small" : "ncolorButton small"} onClick={this.handleColorClick}>blue</button>
                                     <button id='purple' className={this.state.color === 'purple' ? "colorButton small" : "ncolorButton small"} onClick={this.handleColorClick}>purple</button>
                                     <button id='pink' className={this.state.color === 'pink' ? "colorButton small" : "ncolorButton small"} onClick={this.handleColorClick}>pink</button>
-                                </div>
                             </div>
                             <div className="cartbtn"><button className='cartButton' onClick={(e) => this.handleAddToCart(e, this.props.product)}>Add to Cart</button></div>
                         </div>

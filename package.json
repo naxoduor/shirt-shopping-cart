@@ -16,6 +16,7 @@
     "react-bootstrap": "^1.0.0-beta.10",
     "react-dom": "^16.8.6",
     "react-numeric-input": "^2.2.3",
+    "react-numeric-textbox": "^1.0.5",
     "react-redux": "^7.1.0",
     "react-redux-firebase": "^2.3.0",
     "react-router-dom": "^5.0.1",

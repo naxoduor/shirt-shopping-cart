@@ -24,7 +24,7 @@ export const fetchCatalogueProducts = (productsurl) => dispatch => {
 
 export const searchProducts = (searchurl, params) => dispatch => {
 
-let searchurl="http://104.248.73.139:8080/products/search"
+let searchurl="http://127.0.0.:8080/products/search"
     axios.post(searchurl, {params})
     .then(res => res.data)
     .then(products => dispatch({
@@ -122,6 +122,15 @@ export const addToCart = (carturl, cartId, item, quantity) => dispatch => {
     params.quantity = quantity
     console.log(params)
     axios.post(carturl, { params })
+}
+
+export const updateCartItem = (carturl, item_id, quantity) => dispatch => {
+
+    let carturl=`http://104.248.73.139:8080/shoppingcart/update/${item_id}`
+    let params = {}
+    params.quantity = quantity
+    axios.put(carturl, { params })
+
 }
 
 export const fetchCartItems = (carturl, cart_id) => dispatch => {

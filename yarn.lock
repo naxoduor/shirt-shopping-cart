@@ -9247,6 +9247,11 @@ react-numeric-input@^2.2.3:
   resolved "https://registry.yarnpkg.com/react-numeric-input/-/react-numeric-input-2.2.3.tgz#4bf5918c3eafed851a80df1eb992d941002bb552"
   integrity sha1-S/WRjD6v7YUagN8euZLZQQArtVI=
 
+react-numeric-textbox@^1.0.5:
+  version "1.0.5"
+  resolved "https://registry.yarnpkg.com/react-numeric-textbox/-/react-numeric-textbox-1.0.5.tgz#e0da34c430e48349b358ee5fbfc90f9ace6c02d8"
+  integrity sha512-PqGDofDXPfI9uStK5zC6xEJADvFLKB7cFff5VQxeDIjT3fB8dCqG2Y/12CIJKB7xzA255eb1Rxin4GLscoBglw==
+
 react-overlays@^1.2.0:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/react-overlays/-/react-overlays-1.2.0.tgz#205368eeb0a5fb0b7f9b717fa7a12d518500abdb"

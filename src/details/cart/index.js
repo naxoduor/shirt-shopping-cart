@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import localStorage from 'local-storage'
 import { connect } from 'react-redux'
-import { removeCartProduct, addToCart } from '../../action/requestActions';
+import { removeCartProduct, updateCartItem } from '../../action/requestActions';
 import './cart.css'
 import { withRouter } from "react-router-dom";
 
@@ -20,13 +20,11 @@ class Cart extends Component {
     this.props.handleClose()
   }
 
-  handleAddProduct = (event, product) => {
-    event.preventDefault()
+  handleAddProduct = (e, item_id) => {
+    e.preventDefault()
     let carturl='http://104.248.73.139:8080/shoppingcart/add'
-    let quantity = event.target.value
-    let cartId= localStorage.get("cartId")
-    console.log(carturl, quantity, cartId)
-    this.props.addToCart(carturl, cartId, product, quantity)
+    let quantity = e.target.value
+    this.props.updateCartItem(carturl, item_id, quantity)
   }
   removeCartProduct = (e, item_id) => {
     e.preventDefault()
@@ -37,7 +35,6 @@ class Cart extends Component {
   }
 
   render() {
-    let items = this.props.cartItems.items
     const showHideClassName = this.props.show ? "cartmodal display-block" : "cartmodal display-none";
     return <div className={ showHideClassName }>
     <h>CART ITEMS</h>
@@ -66,14 +63,15 @@ class Cart extends Component {
                 <img
                   height={70}
                   title={product.name}
+                  padding={10}
                   src={`/products/${product.image}`}
                 />
               </td>
               <td>{product.attributes}</td>
               <td>{product.price}</td>
-              <td><input type="number" min="0" max="10" step="1" value={product.quantity} /></td>
+              <td><input type="number" min="0" max="10" step="1" defaultValue={product.quantity} onClick={(e) => this.handleAddProduct(e, product.item_id)}/></td>
               <td>{product.price * product.quantity}</td>
-              <td><span className="rmvItem" onClick={(e) => this.removeCartProduct(e, product.item_id)}>&times;</span></td>
+              <td><span className="rmvItem" onClick={(e) => this.removeCartProduct(e, product.item_id)}>&times;</span></td>      
             </tr>)
           }
         </tbody>
@@ -94,7 +92,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     removeCartProduct: (carturl, item_id) => dispatch(removeCartProduct(carturl, item_id)),
-    addToCart: (carturl, cartId, product, quantity) => dispatch(addToCart(carturl, cartId, product, quantity))
+    updateCartItem: (carturl, item_id, quantity) => dispatch(updateCartItem(carturl, item_id, quantity))
   }
 }
 
