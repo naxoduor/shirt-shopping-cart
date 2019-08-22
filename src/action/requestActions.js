@@ -14,7 +14,7 @@ import {
 export const fetchCatalogueProducts = (productsurl) => dispatch => {
 
     let productsurl="http://104.248.73.139:8080/products"
-    axios.get(productsurl)
+     axios.get(productsurl)
         .then(res => res.data)
         .then(products => dispatch({
             type: FETCH_CATALOGUE_PRODUCTS,
@@ -25,7 +25,7 @@ export const fetchCatalogueProducts = (productsurl) => dispatch => {
 export const searchProducts = (searchurl, params) => dispatch => {
 
 let searchurl="http://127.0.0.:8080/products/search"
-    axios.post(searchurl, {params})
+     axios.post(searchurl, {params})
     .then(res => res.data)
     .then(products => dispatch({
         type: FETCH_SEARCH_PRODUCTS,
@@ -36,7 +36,7 @@ let searchurl="http://127.0.0.:8080/products/search"
 export const fetchDepartments = (departmentsurl) => dispatch => {
 
     let departmentsurl="http://104.248.73.139:8080/departments"
-    axios.get(departmentsurl)
+     axios.get(departmentsurl)
         .then(res => res.data)
         .then(departments => dispatch({
             type: FETCH_DEPARTMENTS,
@@ -47,7 +47,7 @@ export const fetchDepartments = (departmentsurl) => dispatch => {
 export const fetchCategories = (categoriesurl) => dispatch => {
 
     let categoriesurl="http://104.248.73.139:8080/categories"
-    axios.get(categoriesurl)
+     axios.get(categoriesurl)
         .then(res => res.data)
         .then(categories => dispatch({
             type: FETCH_CATEGORIES,
@@ -59,7 +59,7 @@ export const fetchCategoriesByDepartment = (departmentcategoriesurl, id) => disp
 
     let departmentcategoriesurl=`http://104.248.73.139:8080/categories/inDepartment/${id}`;
     console.log(departmentcategoriesurl)
-    axios.get(departmentcategoriesurl)
+     axios.get(departmentcategoriesurl)
         .then(res => res.data)
         .then(categories => dispatch({
             type: FETCH_CATEGORIES_BY_DEPARTMENT,
@@ -73,7 +73,7 @@ export const fetchProductsByDepartment = (departmentproductsurl, id) => dispatch
     let departmentproductsurl=`http://104.248.73.139:8080/products/inDepartment/${id}`;
     let obj = {}
     obj.department_id = id
-    axios.get(departmentproductsurl)
+     axios.get(departmentproductsurl)
         .then(res => res.data)
         .then(products => dispatch({
             type: FETCH_PRODUCTS_BY_DEPARTMENT,

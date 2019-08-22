@@ -28,11 +28,6 @@ class ShirtList extends Component {
 
     
     displayCart = () => {
-        let cart_id = localStorage.get("cartId")
-        let carturl = "http://127.0.0.1:8080/shoppingcart/?cart_id=" + cart_id;
-        let cartamounturl = "http://127.0.0.1:8080/shoppingcart/totalamount/?cart_id=" + cart_id;
-        this.props.fetchCartItems(carturl, cart_id)
-        this.props.fetchCartTotalAmount(cartamounturl, cart_id)
         this.setState({ showCart: true })
     }
 

@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import localStorage from 'local-storage'
 import { connect } from 'react-redux'
-import { addToCart } from '../../action/requestActions'
+import { addToCart, fetchCartItems } from '../../action/requestActions'
 import './details-modal.css';
 
 class DetailsModal extends Component {
@@ -42,7 +42,9 @@ class DetailsModal extends Component {
         let quantity= this.state.quantity
         let carturl = 'http://127.0.0.1:8080/shoppingcart/add'
         let cartId = localStorage.get("cartId")
+        let cartshoppingurl = "http://127.0.0.1:8080/shoppingcart/?cart_id=" + cart_id;
         this.props.addToCart(carturl, cartId, product, quantity)
+        this.props.fetchCartItems(cartshoppingurl, cart_Id)
         this.props.handleClose()
     }
 
@@ -113,7 +115,8 @@ class DetailsModal extends Component {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        addToCart: (carturl, cartId, product, quantity) => dispatch(addToCart(carturl, cartId, product, quantity))
+        addToCart: (carturl, cartId, product, quantity) => dispatch(addToCart(carturl, cartId, product, quantity)),
+        fetchCartItems: (cartshoppingurl, cart_Id) => dispatch(fetchCartItems(cartshoppingurl, cart_Id))
     }
 }
 
