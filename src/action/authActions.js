@@ -3,14 +3,19 @@ import { CUSTOMER_DETAILS, SIGNUP_ACHIEVED, LOGIN_ACHIEVED } from './types'
 
 export const signIn = (credentials) => {
     return (dispatch, getState, { getFirebase }) => {
-
+        let customer = {}
+        customer.email = credentials.email
+        customer.password = credentials.password
         const firebase = getFirebase()
-
         firebase.auth().signInWithEmailAndPassword(
             credentials.email,
             credentials.password
         ).then(() => {
-            dispatch({ type: 'LOGIN_SUCCESS' })
+            dispatch({ type: 'LOGIN_SUCCESS' }),
+                dispatch({
+                    type: CUSTOMER_DETAILS,
+                    payload: customer
+                })
         }).catch((err) => {
             dispatch({ type: 'LOGIN_ERROR', err })
         });

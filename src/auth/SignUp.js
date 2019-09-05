@@ -19,8 +19,6 @@ class SignUp extends Component {
 
     handleSubmit = (e) => {
         e.preventDefault();
-        console.log("handle submit")
-        console.log("we are signing up the useerrrrrr")
         this.props.signUp(this.state)
         this.props.handleClose()
         this.props.displaySignIn()

@@ -48,7 +48,6 @@ class App extends Component {
     if (!localStorage.get("cartId")) {
       let carturl = "http://127.0.0.1:8080/shoppingcart/generateUniqueId"
       this.props.generateUniqueCartId(carturl)
-      console.log("fetch shipping regions")
     }
   }
 
@@ -58,16 +57,19 @@ class App extends Component {
     let signedup = this.props.signing.logged
     if (auth.uid) {
       if (signedup) {
-        this.props.signupUser(this.props.customer.items)
+        let username = this.props.customer.items.name
+        let email = this.props.customer.items.email
+        let password = this.props.customer.items.password
+        this.props.signupUser(username, email, password)
       }
     }
 
     if (auth.uid) {
-      console.log("user authentication id has been found")
       if (!this.state.loggedin) {
         let customer={email:auth.email}
-        console.log("login the user")
-        this.props.signinUser(customer)
+        let email = this.props.customer.items.email
+        let password = this.props.customer.items.password
+        this.props.signinUser(email, password)
         this.setState({ loggedin: true })
       }
     }
@@ -108,8 +110,8 @@ class App extends Component {
 const mapDispatchToProps = (dispatch) => {
   return {
     signOut: () => dispatch(signOut()),
-    signupUser: (user) => dispatch(signupUser(user)),
-    signinUser: (customer) => dispatch(signinUser(customer)),
+    signupUser: (username, email, password) => dispatch(signupUser(username, email, password)),
+    signinUser: (email, password) => dispatch(signinUser(email, password)),
     generateUniqueCartId: (carturl) => dispatch(generateUniqueCartId(carturl)),
     fetchShippingRegions: () => dispatch(fetchShippingRegions())
   }
