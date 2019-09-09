@@ -15,6 +15,7 @@ import shippingRegionsReducer from './shippingregionsreducer'
 import shippingInfoReducer from './shippinginforeducer'
 import idsReducer from './categoriesdepartmentidreducer'
 import shippingIdReducer from  './shippingidreducer'
+import attributesReducer from './attributesreducer'
 
 
 export default combineReducers({
@@ -31,6 +32,7 @@ export default combineReducers({
     shippingInfo: shippingInfoReducer,
     selectedId: idsReducer,
     shippingId: shippingIdReducer,
+    attributes: attributesReducer,
     auth: authReducer,
     firebase: firebaseReducer
 })

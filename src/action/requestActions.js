@@ -8,7 +8,8 @@ import {
     FETCH_CATEGORY_PAGE_PRODUCTS, SIGNED_UP_LOCALLY, FETCH_CATEGORY_PAGINATION_PRODUCTS,
     FETCH_DEPARTMENT_PAGINATION_PRODUCTS, UPDATE_CUSTOMER_ID, FETCH_SHIPPING_REGIONS, 
     FETCH_SHIPPING_INFO, UPDATE_CATEGORYID, UPDATE_DEPARTMENTID, UPDATE_SHIPPING_ID,
-    FETCH_SEARCH_PRODUCTS
+    FETCH_SEARCH_PRODUCTS,
+    FETCH_ATTRIBUTES
 } from './types'
 
 export const fetchCatalogueProducts = (productsurl) => dispatch => {
@@ -244,6 +245,17 @@ export const fetchDepartmentPaginationProducts = (finalurl, id, params) => dispa
             payload: products
         }))
 }
+
+export const fetchAttributes = (product_id) => dispatch => {
+    let attributesurl=`http://127.0.0.1:8080/attributes/inAttribute/${product_id}`
+    axios.get(attributesurl)
+        .then(res => res.data)
+        .then(attributes => dispatch({
+            type: FETCH_ATTRIBUTES,
+            payload: attributes
+        }))
+}
+
 
 export const fetchCategoryPaginationProducts = (finalurl, id, params) => dispatch => {
 

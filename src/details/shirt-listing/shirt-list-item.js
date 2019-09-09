@@ -1,13 +1,16 @@
 import React, { Component } from 'react'
 import DetailsModal from './details-modal'
 import './shirt-list-item.css';
+import { fetchAttributes } from '../../action/requestActions'
+import { connect } from 'react-redux'
 
 class ShirtListItem extends Component {
 
     state = { show: false }
-
-    showModal = () => {
+    showModal = (e, product_id) => {
+        e.preventDefault();
         console.log("show the modal")
+        this.props.fetchAttributes(product_id)
         this.setState({ show: true })
     }
 
@@ -22,7 +25,7 @@ class ShirtListItem extends Component {
                         <img
                             title={this.props.product.name}
                             src={`/products/${this.props.product.image}`}
-                            onClick={this.showModal}
+                            onClick={(e)=>this.showModal(e,this.props.product.product_id)}
                         />
                         <div className="title2">{this.props.product.name}</div>
                         <div className="priceButtons">${this.props.product.price}</div>
@@ -39,4 +42,11 @@ class ShirtListItem extends Component {
     }
 }
 
-export default ShirtListItem
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        fetchAttributes: (product_id) => dispatch(fetchAttributes(product_id)),
+    }
+}
+
+export default connect(null, mapDispatchToProps)(ShirtListItem)
