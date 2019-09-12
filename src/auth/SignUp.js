@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { signUp } from '../action/authActions'
+import { signupUser } from '../action/requestActions'
 import './auth.css';
 class SignUp extends Component {
     state = {
@@ -18,8 +19,11 @@ class SignUp extends Component {
     }
 
     handleSubmit = (e) => {
+        let username = `${this.state.firstName} ${this.state.lastName}`
+        let email = this.state.email
+        let password = this.state.password
         e.preventDefault();
-        this.props.signUp(this.state)
+        this.props.signupUser(username, email, password)
         this.props.handleClose()
         this.props.displaySignIn()
     }
@@ -81,7 +85,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        signUp: (newUser) => dispatch(signUp(newUser)),
+        signupUser: (username, email, password) => dispatch(signupUser(username, email, password)),
     }
 }
 

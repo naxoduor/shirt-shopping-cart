@@ -5,18 +5,15 @@ import HomePage from './containers/homepage'
 import SignIn from './auth/SignIn'
 import SignUp from './auth/SignUp'
 import { signOut } from './action/authActions'
-import { signupUser, signinUser } from './action/requestActions'
+import { signupUser, signinUser, signOutUser } from './action/requestActions'
 import CheckOut from './details/checkout'
-import { Form, FormControl, Button } from 'react-bootstrap';
 import localStorage from 'local-storage'
 import { generateUniqueCartId, fetchShippingRegions } from './action/requestActions'
-import { Link } from 'react-router-dom';
 import { NavLink as ReactLink } from 'react-router-dom';
 import './App.css';
 import { connect } from 'react-redux';
 
 class App extends Component {
-
   constructor(props) {
     super(props)
     this.state = {
@@ -42,6 +39,10 @@ class App extends Component {
     this.setState({ showSignUpModal: false })
   }
 
+  signTheUserOut = (e) => {
+    this.props.signOutUser()
+  }
+
   componentWillMount() {
     console.log("inside component will mount")
     this.props.fetchShippingRegions()
@@ -52,28 +53,6 @@ class App extends Component {
   }
 
   render() {
-    const { auth } = this.props;
-    console.log(auth)
-    let signedup = this.props.signing.logged
-    if (auth.uid) {
-      if (signedup) {
-        let username = this.props.customer.items.name
-        let email = this.props.customer.items.email
-        let password = this.props.customer.items.password
-        this.props.signupUser(username, email, password)
-      }
-    }
-
-    if (auth.uid) {
-      if (!this.state.loggedin) {
-        let customer={email:auth.email}
-        let email = this.props.customer.items.email
-        let password = this.props.customer.items.password
-        this.props.signinUser(email, password)
-        this.setState({ loggedin: true })
-      }
-    }
-
     return (
       <div className="App">
         <div>
@@ -89,9 +68,9 @@ class App extends Component {
                 /> 
               </Navbar.Brand>
               <Nav className="ml-auto linkItems">
-                <Nav.Link className={auth.uid ? '' : 'hidden'} href="#" tag={ReactLink} to="/" onClick={this.props.signOut}>Log Out</Nav.Link>
-                <Nav.Link className={auth.uid ? 'hidden' : ''} href="#" tag={ReactLink} to="/" onClick={this.showSignInModal}>Sign In</Nav.Link>
-                <Nav.Link className={auth.uid ? 'hidden' : ''} href="#" tag={ReactLink} to="/" onClick={this.showSignUpModal}>Sign Up</Nav.Link>
+                <Nav.Link className={this.props.authentication.authenticated ? '' : 'hidden'} href="#" tag={ReactLink} to="/" onClick={this.signTheUserOut}>Log Out</Nav.Link>
+                <Nav.Link className={this.props.authentication.authenticated ? 'hidden' : ''} href="#" tag={ReactLink} to="/" onClick={this.showSignInModal}>Sign In</Nav.Link>
+                <Nav.Link className={this.props.authentication.authenticated ? 'hidden' : ''} href="#" tag={ReactLink} to="/" onClick={this.showSignUpModal}>Sign Up</Nav.Link>
               </Nav>
             </Navbar>
             <SignIn show={this.state.showSignInModal} handleClose={this.hideSignInModal} />
@@ -113,7 +92,8 @@ const mapDispatchToProps = (dispatch) => {
     signupUser: (username, email, password) => dispatch(signupUser(username, email, password)),
     signinUser: (email, password) => dispatch(signinUser(email, password)),
     generateUniqueCartId: (carturl) => dispatch(generateUniqueCartId(carturl)),
-    fetchShippingRegions: () => dispatch(fetchShippingRegions())
+    fetchShippingRegions: () => dispatch(fetchShippingRegions()),
+    signOutUser: () => dispatch(signOutUser())
   }
 }
 
@@ -121,7 +101,8 @@ const mapStateToProps = (state) => {
   return {
     auth: state.firebase.auth,
     signing: state.signing,
-    customer: state.customer
+    customer: state.customer,
+    authentication: state.authentication
     }
 
 }

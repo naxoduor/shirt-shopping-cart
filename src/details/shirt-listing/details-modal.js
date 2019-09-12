@@ -49,6 +49,25 @@ class DetailsModal extends Component {
 
     render() {
         const showHideClassName = this.props.show ? "modal display-block" : "modal display-none";
+        let colors = this.props.attributes.items.colorAttributes
+        let size = this.props.attributes.items.sizeAttributes
+        let renderSize=""
+        let renderColors=""
+        if(size) {
+           renderSize = size.map(currentSize => {
+            return (
+                <button id={currentSize.value} className={this.state.size === currentSize.value ? "sizeButton small" : "nsizeButton small"} onClick={this.handleSizeClick} >{currentSize.value}</button>
+            )
+        })
+    }
+
+    if(colors) {
+        renderColors = colors.map(currentColor => {
+         return (
+            <button id={currentColor.value} className={this.state.color === currentColor.value ? "colorButton small" : "ncolorButton small"} onClick={this.handleColorClick}>{currentColor.value}</button>
+         )
+     })
+ }
         return (
             <div className={showHideClassName}>
                 <div className="modal-main">
@@ -82,24 +101,12 @@ class DetailsModal extends Component {
                             <input className="quainput" type="number" min={0} max={10} defaultValue="1" step={1} onClick={(e) => this.handleQuantityClick(e)}/>
                             <label className="label">size</label>
                             <div className='sizebs'>
-                                    <button id='S' className={this.state.size === 'S' ? "sizeButton small" : "nsizeButton small"} onClick={this.handleSizeClick} >S</button>
-                                    <button id='M' className={this.state.size === 'M' ? "sizeButton medium" : "nsizeButton medium"} onClick={this.handleSizeClick} >M</button>
-                                    <button id='L' className={this.state.size === 'L' ? "sizeButton large" : "nsizeButton large"} onClick={this.handleSizeClick} >L</button>
-                                    <button id='XL' className={this.state.size === 'XL' ? "sizeButton xlarge" : "nsizeButton xlarge"} onClick={this.handleSizeClick} >XL</button>
-                                    <button id='XXL' className={this.state.size === 'XXL' ? "sizeButton xxlarge" : "nsizeButton xxlarge"} onClick={this.handleSizeClick} >XXL</button>
+                                    { renderSize }
                                 </div>
                             </div>
                             <label className='label'>Color</label><br/>
                             <div className='moColorButtons'>
-                                    <button id='white' className={this.state.color === 'white' ? "colorButton small" : "ncolorButton small"} onClick={this.handleColorClick}>white</button>
-                                    <button id='black' className={this.state.color === 'black' ? "colorButton small" : "ncolorButton small"} onClick={this.handleColorClick}>black</button>
-                                    <button id='red' className={this.state.color === 'red' ? "colorButton small" : "ncolorButton small"} onClick={this.handleColorClick}>red</button>
-                                    <button id='orange' className={this.state.color === 'orange' ? "colorButton small" : "ncolorButton small"} onClick={this.handleColorClick}>orange</button>
-                                    <button id='yellow' className={this.state.color === 'yellow' ? "colorButton small" : "ncolorButton small"} onClick={this.handleColorClick}>yellow</button>
-                                    <button id='green' className={this.state.color === 'green' ? "colorButton small" : "ncolorButton small"} onClick={this.handleColorClick}>green</button>
-                                    <button id='blue' className={this.state.color === 'blue' ? "colorButton small" : "ncolorButton small"} onClick={this.handleColorClick}>blue</button>
-                                    <button id='purple' className={this.state.color === 'purple' ? "colorButton small" : "ncolorButton small"} onClick={this.handleColorClick}>purple</button>
-                                    <button id='pink' className={this.state.color === 'pink' ? "colorButton small" : "ncolorButton small"} onClick={this.handleColorClick}>pink</button>
+                                    { renderColors }
                             </div>
                             <div className="cartbtn"><button className='cartButton' onClick={(e) => this.handleAddToCart(e, this.props.product)}>Add to Cart</button></div>
                         </div>
@@ -112,6 +119,13 @@ class DetailsModal extends Component {
     }
 }
 
+
+const mapStateToProps = state => ({
+    attributes: state.attributes,
+    
+})
+
+
 const mapDispatchToProps = (dispatch) => {
     return {
         addToCart: (carturl, cartId, product, quantity) => dispatch(addToCart(carturl, cartId, product, quantity)),
@@ -119,4 +133,4 @@ const mapDispatchToProps = (dispatch) => {
     }
 }
 
-export default connect(null, mapDispatchToProps)(DetailsModal)
+export default connect(mapStateToProps, mapDispatchToProps)(DetailsModal)

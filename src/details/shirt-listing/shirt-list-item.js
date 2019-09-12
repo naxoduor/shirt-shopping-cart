@@ -8,8 +8,6 @@ class ShirtListItem extends Component {
 
     state = { show: false }
     showModal = (e, product_id) => {
-        e.preventDefault();
-        console.log("show the modal")
         this.props.fetchAttributes(product_id)
         this.setState({ show: true })
     }
@@ -18,22 +16,22 @@ class ShirtListItem extends Component {
         this.setState({ show: false })
     }
     render() {
+        let product_id=this.props.product.product_id
         return (
             <div className='product-list-item'>
-                <div className="image_wrapper">
+                <div className="image_wrapper" onClick={(e) => this.showModal(e, product_id)}>
                     <div className="list_wrapper">
                         <img
                             title={this.props.product.name}
                             src={`/products/${this.props.product.image}`}
-                            onClick={(e)=>this.showModal(e,this.props.product.product_id)}
                         />
                         <div className="title2">{this.props.product.name}</div>
                         <div className="priceButtons">${this.props.product.price}</div>
                     </div>
-                    <div className="item_details" onClick={this.showModal}>
+                    <div className="item_details">
                         <h10 className="title">{this.props.product.name}</h10>
                         <label className="priceButtons">${this.props.product.price}</label>
-                    <button className="addButton">Add To Cart</button>
+                        <button className="addButton">Add To Cart</button>
                     </div>
                 </div>
                 <DetailsModal show={this.state.show} handleClose={this.hideModal} product={this.props.product} />

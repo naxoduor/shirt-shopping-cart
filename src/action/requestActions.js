@@ -8,7 +8,7 @@ import {
     FETCH_CATEGORY_PAGE_PRODUCTS, SIGNED_UP_LOCALLY, FETCH_CATEGORY_PAGINATION_PRODUCTS,
     FETCH_DEPARTMENT_PAGINATION_PRODUCTS, UPDATE_CUSTOMER_ID, FETCH_SHIPPING_REGIONS, 
     FETCH_SHIPPING_INFO, UPDATE_CATEGORYID, UPDATE_DEPARTMENTID, UPDATE_SHIPPING_ID,
-    FETCH_SEARCH_PRODUCTS,
+    FETCH_SEARCH_PRODUCTS, LOGIN_SUCCESS, LOGOUT_SUCCESS,
     FETCH_ATTRIBUTES
 } from './types'
 
@@ -222,12 +222,40 @@ export const signupUser = (username, email, password) => dispatch => {
 export const signinUser = (email, password) => dispatch => {
     let customerList=[]
     axios.post('http://127.0.0.1:8080/customers/login', { email, password })
-        .then((res) => {
-            customerList.push({customer_id:res.data.user.customer_id})
-            dispatch({
+    .then((res)  => {
+        console.log("dispatching the resulys")
+        console.log(res.data.token)
+        console.log(res.data.customer.customer_id)
+        customerList.push(res.data.customer.customer_id)
+        localStorage.set("token", res.data.token)
+                dispatch({
                 type: UPDATE_CUSTOMER_ID,
                 payload: customerList
+            })
+            dispatch({
+                type: LOGIN_SUCCESS,
+                payload: res.data.auth
             })  
+        })
+        .catch(err => {
+            dispatch({ type: 'SIGNUP_ERROR', err })
+        })
+}
+
+
+export const signOutUser = () => dispatch => {
+    axios.get('http://127.0.0.1:8080/customers/logout')
+        .then((res) => {
+            console.log(res.data)
+            dispatch({
+                type: LOGOUT_SUCCESS,
+                payload: false
+            })  
+        })
+        .catch(err => {
+            console.log("an error has been caught")
+            console.log(err)
+            //dispatch({ type: 'SIGNUP_ERROR', err })
         })
 }
 
@@ -247,6 +275,7 @@ export const fetchDepartmentPaginationProducts = (finalurl, id, params) => dispa
 }
 
 export const fetchAttributes = (product_id) => dispatch => {
+    
     let attributesurl=`http://127.0.0.1:8080/attributes/inAttribute/${product_id}`
     axios.get(attributesurl)
         .then(res => res.data)

@@ -95,7 +95,6 @@ class ShirtList extends Component {
             );
         });
 
-
         let currentShirtProducts = this.props.products.items
         const renderShirtProducts = currentShirtProducts.map(product => {
             return (

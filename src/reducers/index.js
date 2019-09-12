@@ -16,9 +16,11 @@ import shippingInfoReducer from './shippinginforeducer'
 import idsReducer from './categoriesdepartmentidreducer'
 import shippingIdReducer from  './shippingidreducer'
 import attributesReducer from './attributesreducer'
+import authenticationReducer from './authenticationReducer'
 
 
 export default combineReducers({
+    authentication: authenticationReducer,
     products: productsReducer,
     departments: departmentsReducer,
     categories: categoriesReducer,

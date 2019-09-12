@@ -3,7 +3,6 @@ import { connect } from 'react-redux'
 import CheckoutForm from './checkoutform';
 import StripeCheckout from '../payments/StripeCheckout'
 
-
 class Checkout extends React.Component{
 state = {
     flag: true,
@@ -35,12 +34,9 @@ const mapDispatchToProps = (dispatch) => {
      // createOrder: (user) => dispatch(createOrder(user)),
     }
   }
-
-  
   
   const mapStateToProps = (state) => {
-  return {
-        
+  return {        
     }
 }
 

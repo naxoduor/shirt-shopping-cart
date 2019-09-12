@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
-import { signIn } from '../action/authActions'
+import { signinUser } from '../action/requestActions'
 import { connect } from 'react-redux'
 import './auth.css';
-import { signupUser, signinUser } from '../action/requestActions'
-import { Redirect } from 'react-router-dom'
 
 class SignIn extends Component {
     constructor() {
@@ -22,9 +20,9 @@ class SignIn extends Component {
 
     handleSubmit = (e) => {
         e.preventDefault();
-        console.log("we are signing in the userrrrrr")
-        this.props.signIn(this.state)
-        this.props.signinUser(this.state)
+        let email=this.state.email
+        let password=this.state.password
+        this.props.signinUser(email, password)
         this.props.handleClose()
     }
     render() {
@@ -69,8 +67,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        signIn: (creds) => dispatch(signIn(creds)),
-        signinUser: (customer) => dispatch(signinUser(customer))
+        signinUser: (email, password) => dispatch(signinUser(email, password))
     }
 
 }
