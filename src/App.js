@@ -46,7 +46,7 @@ class App extends Component {
   componentWillMount() {
     console.log("inside component will mount")
     this.props.fetchShippingRegions()
-    let token = localStorage.get("cartId")
+    let token = localStorage.get("token")
     console.log("The said token is")
     console.log(token)
     this.props.authorizeCheckout(token)

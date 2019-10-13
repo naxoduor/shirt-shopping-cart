@@ -226,16 +226,11 @@ export const signinUser = (email, password) => dispatch => {
     .then(token  => {
         console.log("set token")
         console.log(token)
-        /*customerList.push(res.data.customer.customer_id)
-        localStorage.set("token", res.data.token)
+        localStorage.set("token", token)
                 dispatch({
-                type: UPDATE_CUSTOMER_ID,
-                payload: customerList
-            })
-            dispatch({
                 type: LOGIN_SUCCESS,
-                payload: res.data.auth
-            })  */
+                payload: true
+            })  
         })
         .catch(err => {
             dispatch({ type: 'SIGNUP_ERROR', err })
@@ -246,6 +241,7 @@ export const signOutUser = () => dispatch => {
     axios.get('http://127.0.0.1:8080/customers/logout')
         .then((res) => {
             console.log(res.data)
+            localStorage.set("token", null)
             dispatch({
                 type: LOGOUT_SUCCESS,
                 payload: false
@@ -342,8 +338,8 @@ export  const authorizeCheckout = (token) => dispatch => {
     axios.get('http://127.0.0.1:8080/protected', { headers: {"Authorization" : `Bearer ${token}`} })
     .then(res => res.data)
     .then(customer => dispatch({
-        type: UPDATE_CUSTOMER_ID,
-        payload: customer.customer_id
+        type: LOGIN_SUCCESS,
+        payload:true,
     }))
     .catch(err=>dispatch({
         type:TOKEN_ERROR
