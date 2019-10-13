@@ -29,10 +29,16 @@ class ShirtList extends Component {
     
     displayCart = () => {
         let cartId = localStorage.get("cartId")
+        let token = localStorage.get("token")
         let cart_id = cartId
+        console.log("The token is")
+        console.log(token)
+        console.log("The cartid is")
+        console.log(cart_id)
+        
         let cartshoppingurl = "http://127.0.0.1:8080/shoppingcart/?cart_id=" + cart_id;
         this.props.fetchCartItems(cartshoppingurl, cart_id)
-        this.props.authorizeCheckout()
+        this.props.authorizeCheckout(token)
         this.setState({ showCart: true })
     }
 
@@ -138,7 +144,7 @@ const mapDispatchToProps = (dispatch) => {
         fetchCartTotalAmount: (cartamounturl, cart_id) => dispatch(fetchCartTotalAmount(cartamounturl, cart_id)),
         fetchCategoryPaginationProducts: (productsurl, id, params) => dispatch(fetchCategoryPaginationProducts(productsurl, id, params)),
         fetchDepartmentPaginationProducts: (productsurl, id, params) => dispatch(fetchDepartmentPaginationProducts(productsurl, id, params)),
-        authorizeCheckout: () => dispatch(authorizeCheckout())
+        authorizeCheckout: (token) => dispatch(authorizeCheckout(token))
     }
 }
 

@@ -242,6 +242,7 @@ export const signOutUser = () => dispatch => {
         .then((res) => {
             console.log(res.data)
             localStorage.set("token", null)
+            localStorage.set("cartId", null)
             dispatch({
                 type: LOGOUT_SUCCESS,
                 payload: false
