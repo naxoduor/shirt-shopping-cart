@@ -15,7 +15,6 @@ import rootReducer from './reducers'
 import 'bootstrap/dist/css/bootstrap.css'
 
 const initialState = [];
-
 const store = createStore(rootReducer, composeWithDevTools(
     applyMiddleware(thunk.withExtraArgument({ getFirebase, getFirestore})),
     reduxFirestore(fbConfig),

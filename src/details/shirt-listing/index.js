@@ -7,7 +7,7 @@ import localStorage from 'local-storage'
 import {
     fetchCartItems, fetchCategoryPaginationProducts,
     fetchDepartmentPaginationProducts, fetchCartTotalAmount, 
-    searchProducts
+    searchProducts, authorizeCheckout
 } from '../../action/requestActions'
 import './index.css'
 class ShirtList extends Component {
@@ -32,6 +32,7 @@ class ShirtList extends Component {
         let cart_id = cartId
         let cartshoppingurl = "http://127.0.0.1:8080/shoppingcart/?cart_id=" + cart_id;
         this.props.fetchCartItems(cartshoppingurl, cart_id)
+        this.props.authorizeCheckout()
         this.setState({ showCart: true })
     }
 
@@ -137,6 +138,7 @@ const mapDispatchToProps = (dispatch) => {
         fetchCartTotalAmount: (cartamounturl, cart_id) => dispatch(fetchCartTotalAmount(cartamounturl, cart_id)),
         fetchCategoryPaginationProducts: (productsurl, id, params) => dispatch(fetchCategoryPaginationProducts(productsurl, id, params)),
         fetchDepartmentPaginationProducts: (productsurl, id, params) => dispatch(fetchDepartmentPaginationProducts(productsurl, id, params)),
+        authorizeCheckout: () => dispatch(authorizeCheckout())
     }
 }
 

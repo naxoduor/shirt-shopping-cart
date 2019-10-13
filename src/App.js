@@ -8,7 +8,7 @@ import { signOut } from './action/authActions'
 import { signupUser, signinUser, signOutUser } from './action/requestActions'
 import CheckOut from './details/checkout'
 import localStorage from 'local-storage'
-import { generateUniqueCartId, fetchShippingRegions } from './action/requestActions'
+import { generateUniqueCartId, fetchShippingRegions, authorizeCheckout } from './action/requestActions'
 import { NavLink as ReactLink } from 'react-router-dom';
 import './App.css';
 import { connect } from 'react-redux';
@@ -46,6 +46,10 @@ class App extends Component {
   componentWillMount() {
     console.log("inside component will mount")
     this.props.fetchShippingRegions()
+    let token = localStorage.get("cartId")
+    console.log("The said token is")
+    console.log(token)
+    this.props.authorizeCheckout(token)
     if (!localStorage.get("cartId")) {
       let carturl = "http://127.0.0.1:8080/shoppingcart/generateUniqueId"
       this.props.generateUniqueCartId(carturl)
@@ -93,7 +97,8 @@ const mapDispatchToProps = (dispatch) => {
     signinUser: (email, password) => dispatch(signinUser(email, password)),
     generateUniqueCartId: (carturl) => dispatch(generateUniqueCartId(carturl)),
     fetchShippingRegions: () => dispatch(fetchShippingRegions()),
-    signOutUser: () => dispatch(signOutUser())
+    signOutUser: () => dispatch(signOutUser()),
+    authorizeCheckout:(token) => dispatch(authorizeCheckout(token))
   }
 }
 

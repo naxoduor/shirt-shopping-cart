@@ -9,7 +9,7 @@ import {
     FETCH_DEPARTMENT_PAGINATION_PRODUCTS, UPDATE_CUSTOMER_ID, FETCH_SHIPPING_REGIONS, 
     FETCH_SHIPPING_INFO, UPDATE_CATEGORYID, UPDATE_DEPARTMENTID, UPDATE_SHIPPING_ID,
     FETCH_SEARCH_PRODUCTS, LOGIN_SUCCESS, LOGOUT_SUCCESS,
-    FETCH_ATTRIBUTES
+    FETCH_ATTRIBUTES, UPDATE_AUTHORIZATION, TOKEN_ERROR
 } from './types'
 
 export const fetchCatalogueProducts = (productsurl) => dispatch => {
@@ -222,11 +222,11 @@ export const signupUser = (username, email, password) => dispatch => {
 export const signinUser = (email, password) => dispatch => {
     let customerList=[]
     axios.post('http://127.0.0.1:8080/customers/login', { email, password })
-    .then((res)  => {
-        console.log("dispatching the resulys")
-        console.log(res.data.token)
-        console.log(res.data.customer.customer_id)
-        customerList.push(res.data.customer.customer_id)
+    .then(res => res.data)
+    .then(token  => {
+        console.log("set token")
+        console.log(token)
+        /*customerList.push(res.data.customer.customer_id)
         localStorage.set("token", res.data.token)
                 dispatch({
                 type: UPDATE_CUSTOMER_ID,
@@ -235,13 +235,12 @@ export const signinUser = (email, password) => dispatch => {
             dispatch({
                 type: LOGIN_SUCCESS,
                 payload: res.data.auth
-            })  
+            })  */
         })
         .catch(err => {
             dispatch({ type: 'SIGNUP_ERROR', err })
         })
 }
-
 
 export const signOutUser = () => dispatch => {
     axios.get('http://127.0.0.1:8080/customers/logout')
@@ -259,13 +258,11 @@ export const signOutUser = () => dispatch => {
         })
 }
 
-
 export const fetchDepartmentPaginationProducts = (finalurl, id, params) => dispatch => {
 
     let finalurl="http://127.0.0.1:8080/products/inDepartment/pagination/*" + id
     let obj = {}
     obj.department_id = params.department_id
-
     axios.post(finalurl, { params })
         .then(res => res.data)
         .then(products => dispatch({
@@ -284,7 +281,6 @@ export const fetchAttributes = (product_id) => dispatch => {
             payload: attributes
         }))
 }
-
 
 export const fetchCategoryPaginationProducts = (finalurl, id, params) => dispatch => {
 
@@ -338,4 +334,18 @@ export const createOrder = (order) => dispatch => {
         .then(res => {
             console.log(res)
         })
+}
+
+export  const authorizeCheckout = (token) => dispatch => {
+    console.log("authorizeCheckout actions")
+    console.log(token)
+    axios.get('http://127.0.0.1:8080/protected', { headers: {"Authorization" : `Bearer ${token}`} })
+    .then(res => res.data)
+    .then(customer => dispatch({
+        type: UPDATE_CUSTOMER_ID,
+        payload: customer.customer_id
+    }))
+    .catch(err=>dispatch({
+        type:TOKEN_ERROR
+    }))
 }

@@ -14,7 +14,7 @@ class CategoriesList extends Component {
 
     getCategoryProducts = (event, id) => {
         event.preventDefault();
-        
+
         this.setState({categoryId:id})
         let productsurl="http://127.0.0.1:8080/products/inCategory/?id="+id;
         this.props.fetchProductsByCategory(productsurl)
