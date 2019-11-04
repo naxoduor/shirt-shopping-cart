@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import localStorage from 'local-storage'
 import { connect } from 'react-redux'
-import { removeCartProduct, updateCartItem, fetchCartItems } from '../../action/requestActions';
+import { removeCartProduct, updateCartItem, fetchCartItems, generateTransactionNumber } from '../../action/requestActions';
 import './cart.css'
 import { withRouter } from "react-router-dom";
 
@@ -16,7 +16,14 @@ class Cart extends Component {
 
   checkout = (event) => {
     console.log("checkout method has been called")
+    if(this.props.authentication.authenticated){
+    this.props.generateTransactionNumber()
     this.props.history.push('/checkout')
+    }
+    else{
+      this.props.showSignIn()
+      this.props.history.push('/')
+    }
     this.props.handleClose()
   }
 
@@ -26,6 +33,7 @@ class Cart extends Component {
     let quantity = e.target.value
     this.props.updateCartItem(carturl, item_id, quantity)
   }
+
   removeCartProduct = (e, item_id) => {
     e.preventDefault()
     let carturl = `http://127.0.0.1:8080/shoppingcart/removeProduct/?item_id=${item_id}`
@@ -85,7 +93,8 @@ class Cart extends Component {
 const mapStateToProps = (state) => {
   return {
     cartItems: state.cartItems,
-    cartAmount: state.cartAmount
+    cartAmount: state.cartAmount,
+    authentication: state.authentication
   }
 }
 
@@ -94,6 +103,7 @@ const mapDispatchToProps = (dispatch) => {
     removeCartProduct: (carturl, item_id) => dispatch(removeCartProduct(carturl, item_id)),
     updateCartItem: (carturl, item_id, quantity) => dispatch(updateCartItem(carturl, item_id, quantity)),
     fetchCartItems: (cartshoppingurl, cart_id) => dispatch(fetchCartItems(cartshoppingurl, cart_id)),
+    generateTransactionNumber: () => dispatch(generateTransactionNumber())
   }
 }
 

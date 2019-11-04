@@ -19,7 +19,7 @@ class Home extends Component {
 render(){
     return (
      <div>
-        <ShirtList />
+        <ShirtList showSignIn={this.props.showSignIn} showSignUp={this.props.showSignUp} />
     </div>
     );
 }

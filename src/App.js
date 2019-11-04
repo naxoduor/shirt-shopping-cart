@@ -44,12 +44,9 @@ class App extends Component {
   }
 
   componentWillMount() {
-    console.log("inside component will mount")
     this.props.fetchShippingRegions()
     let token = localStorage.get("token")
-    console.log("The said token is")
-    console.log(token)
-    this.props.authorizeCheckout(token)
+    this.props.authorizeCheckout(token.token)
     if (!localStorage.get("cartId")) {
       let carturl = "http://127.0.0.1:8080/shoppingcart/generateUniqueId"
       this.props.generateUniqueCartId(carturl)
@@ -80,7 +77,7 @@ class App extends Component {
             <SignIn show={this.state.showSignInModal} handleClose={this.hideSignInModal} />
             <SignUp show={this.state.showSignUpModal} handleClose={this.hideSignUpModal} displaySignIn={this.showSignInModal}/>
             <Switch>
-              <Route exact path='/' component={HomePage} />
+              <Route exact path='/' render={() => <HomePage showSignIn={this.showSignInModal} showSignUp={this.showSignUpModal} />} />
               <Route exact path='/checkout' render={() => <CheckOut />} />
             </Switch>
           </Router>

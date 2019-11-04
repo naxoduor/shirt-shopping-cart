@@ -31,10 +31,6 @@ class ShirtList extends Component {
         let cartId = localStorage.get("cartId")
         let token = localStorage.get("token")
         let cart_id = cartId
-        console.log("The token is")
-        console.log(token)
-        console.log("The cartid is")
-        console.log(cart_id)
         
         let cartshoppingurl = "http://127.0.0.1:8080/shoppingcart/?cart_id=" + cart_id;
         this.props.fetchCartItems(cartshoppingurl, cart_id)
@@ -123,7 +119,7 @@ class ShirtList extends Component {
                     </div>
                     <div className="product-listing">
                         {renderShirtProducts}
-                        <Cart show={this.state.showCart} handleClose={this.hideCart} />
+                        <Cart show={this.state.showCart} handleClose={this.hideCart} showSignIn={this.props.showSignIn} showSignUp={this.props.showSignUp} />
                     </div>
                 </div>
             </div>

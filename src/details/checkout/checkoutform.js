@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
 import { Form, Row, Col, FormGroup, FormLabel, FormControl, Button, FormCheck } from 'react-bootstrap';
-import { fetchShippingInformation, updateShippingId, createOrder } from '../../action/requestActions'
+import { fetchShippingInformation, updateShippingId, updateShippingCost, createOrder } from '../../action/requestActions'
 import localStorage from 'local-storage'
 class CheckOutForm extends Component {
     constructor(props) {
@@ -82,17 +82,18 @@ class CheckOutForm extends Component {
 
     handleAddShippingType = (event) => {
         event.preventDefault()
-        let id=event.target.value
-        console.log(id)
-        this.props.updateShippingId(id)
+        let shipping=JSON.parse(event.target.value)
+        let shipping_id=shipping.shipping_id
+        let shipping_cost=shipping.shipping_cost
+        this.props.updateShippingCost(shipping_cost)
+        this.props.updateShippingId(shipping_id)
     }
 
     render() {
-        console.log(this.props.shippingInfo.items)
 
         const renderRegions = this.props.shippingRegions.items.map(region => {
             return (
-                <option value={region.shipping_region_id}>{region.shipping_region}</option>
+                <option value={region.shipping_region_id} >{region.shipping_region}</option>
             )
         })
 
@@ -101,7 +102,7 @@ class CheckOutForm extends Component {
         if (this.state.shippingPresent) {
                 renderShippingInfo = this.props.shippingInfo.items.map(shipping => {
                 return (
-                    <option value={shipping.shipping_id}>{shipping.shipping_cost}</option>
+                    <option value={JSON.stringify(shipping)}>{shipping.shipping_cost}</option>
                 )
             })
 
@@ -209,8 +210,9 @@ class CheckOutForm extends Component {
 const mapDispatchToProps = (dispatch) => {
     return {
         fetchShippingInformation: (region_id) => dispatch(fetchShippingInformation(region_id)),
-        updateShippingId: (id) => dispatch(updateShippingId(id)),
-        createOrder: (order) => dispatch(createOrder(order))
+        updateShippingId: (shipping_id) => dispatch(updateShippingId(shipping_id)),
+        createOrder: (order) => dispatch(createOrder(order)),
+        updateShippingCost: (shipping_cost) => dispatch(updateShippingCost(shipping_cost))
     }
 }
 
