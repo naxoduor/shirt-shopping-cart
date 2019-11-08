@@ -11,7 +11,7 @@ const customerReducer=(state=initialState, action) =>{
         case CUSTOMER_DETAILS:
             return {
                 ...state,
-                items:action.payload
+                item:action.payload
             }
         
         default:

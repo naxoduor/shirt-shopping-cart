@@ -46,7 +46,9 @@ class App extends Component {
   componentWillMount() {
     this.props.fetchShippingRegions()
     let token = localStorage.get("token")
+    if(token){
     this.props.authorizeCheckout(token.token)
+    }
     if (!localStorage.get("cartId")) {
       let carturl = "http://127.0.0.1:8080/shoppingcart/generateUniqueId"
       this.props.generateUniqueCartId(carturl)

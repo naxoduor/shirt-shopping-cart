@@ -46,13 +46,7 @@ class CheckOutForm extends Component {
         document.location.href = `/orders/${json.id}`
     })
     let cartId = localStorage.get("cartId")
-    let customerId = "";
-    this.props.customerId.items.map(custoId => {
-      if(custoId.customer_id){
-      customerId = custoId.customer_id
-      }
-    })
-    //let customerId = this.props.customerid.items[0].customer_id
+    let customerId = this.props.customer.item.customer_id
     let shippingId = this.props.shippingId.items.shippingId
     let order={}
     order.cartId = cartId
@@ -62,7 +56,7 @@ class CheckOutForm extends Component {
 
     console.log(order)
 
-    localStorage.clear();
+    localStorage.set("cartId", null);
     this.props.createOrder(order)
     this.props.handleStripe()
     }
@@ -220,7 +214,7 @@ const mapStateToProps = (state) => {
     return {
         shippingRegions: state.shippingRegions,
         shippingInfo: state.shippingInfo,
-        customerId: state.customerId,
+        customer: state.customer,
         shippingId: state.shippingId,
         cartItems:state.cartItems
     }

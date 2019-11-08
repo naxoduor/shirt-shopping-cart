@@ -34,7 +34,8 @@ class ShirtList extends Component {
         
         let cartshoppingurl = "http://127.0.0.1:8080/shoppingcart/?cart_id=" + cart_id;
         this.props.fetchCartItems(cartshoppingurl, cart_id)
-        this.props.authorizeCheckout(token)
+        this.props.fetchCartTotalAmount(cartshoppingurl, cart_id)
+        this.props.authorizeCheckout(token.token)
         this.setState({ showCart: true })
     }
 
@@ -137,7 +138,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = (dispatch) => {
     return {
         fetchCartItems: (carturl, cart_id) => dispatch(fetchCartItems(carturl, cart_id)),
-        fetchCartTotalAmount: (cartamounturl, cart_id) => dispatch(fetchCartTotalAmount(cartamounturl, cart_id)),
+        fetchCartTotalAmount: (carturl, cart_id) => dispatch(fetchCartTotalAmount(carturl, cart_id)),
         fetchCategoryPaginationProducts: (productsurl, id, params) => dispatch(fetchCategoryPaginationProducts(productsurl, id, params)),
         fetchDepartmentPaginationProducts: (productsurl, id, params) => dispatch(fetchDepartmentPaginationProducts(productsurl, id, params)),
         authorizeCheckout: (token) => dispatch(authorizeCheckout(token))

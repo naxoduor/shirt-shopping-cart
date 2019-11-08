@@ -10,6 +10,7 @@ class SignUp extends Component {
         password: '',
         firstName: '',
         lastName: '',
+        mobile:''
     }
 
     handleChange = (e) => {
@@ -22,8 +23,9 @@ class SignUp extends Component {
         let username = `${this.state.firstName} ${this.state.lastName}`
         let email = this.state.email
         let password = this.state.password
+        let mobile = this.state.mobile
         e.preventDefault();
-        this.props.signupUser(username, email, password)
+        this.props.signupUser(username, email, password, mobile)
         this.props.handleClose()
         this.props.displaySignIn()
     }
@@ -51,12 +53,17 @@ class SignUp extends Component {
                     
                     <div className="input-group">
                         <label className="login-register-label" htmlFor="firstName">First Name</label>
-                        <input className="login-register-input" type="text" id="firstName" placeholder="FirstName" onChange={this.handleChange}></input>
+                        <input className="login-register-input" type="text" id="firstName" placeholder="First Name" onChange={this.handleChange}></input>
                     </div>
 
                     <div className="input-group">
                         <label className="login-register-label" htmlFor="lastName">Last Name</label>
-                        <input className="login-register-input" type="text" id="lastName" placeholder="LastName" onChange={this.handleChange}></input>
+                        <input className="login-register-input" type="text" id="lastName" placeholder="Last Name" onChange={this.handleChange}></input>
+                    </div>
+
+                    <div className="input-group">
+                        <label className="login-register-label" htmlFor="lastName">Mobile Number</label>
+                        <input className="login-register-input" type="text" id="mobile" placeholder="mobile Number" onChange={this.handleChange}></input>
                     </div>
 
                     <div className="input-group">
@@ -85,7 +92,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        signupUser: (username, email, password) => dispatch(signupUser(username, email, password)),
+        signupUser: (username, email, password, mobile) => dispatch(signupUser(username, email, password, mobile)),
     }
 }
 
