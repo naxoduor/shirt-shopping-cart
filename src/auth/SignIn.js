@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { signinUser } from '../action/requestActions'
 import { connect } from 'react-redux'
 import './auth.css';
+import { Navbar, Nav, NavbarBrand, NavItem } from 'react-bootstrap';
+import { NavLink as ReactLink } from 'react-router-dom';
 
 class SignIn extends Component {
     constructor() {
@@ -16,6 +18,11 @@ class SignIn extends Component {
         this.setState({
             [e.target.id]: e.target.value
         })
+    }
+
+    forgotPassword = () => {
+        this.props.handleClose();
+        this.props.showForgot();
     }
 
     handleSubmit = (e) => {
@@ -47,6 +54,11 @@ class SignIn extends Component {
 
                             <div className="input-group">
                                 <button className="login-register-btn">Login</button>
+                            </div>
+                            <div className="linkin">
+                            <Nav>
+                                <Nav.Link  href="#" tag={ReactLink} to="/" onClick={this.forgotPassword}>Forgot Password</Nav.Link>
+                            </Nav>
                             </div>
                             <div className="red-text center">
                             </div>

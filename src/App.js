@@ -4,6 +4,8 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import HomePage from './containers/homepage'
 import SignIn from './auth/SignIn'
 import SignUp from './auth/SignUp'
+import ForgotPassword from './auth/forgotpassword'
+import ResetPassword from './auth/resetpassword'
 import { signOut } from './action/authActions'
 import { signupUser, signinUser, signOutUser } from './action/requestActions'
 import CheckOut from './details/checkout'
@@ -19,6 +21,7 @@ class App extends Component {
     this.state = {
       showSignInModal: false,
       showSignUpModal: false,
+      showForgotPassword: false,
       loggedin: false
     }
   }
@@ -39,10 +42,19 @@ class App extends Component {
     this.setState({ showSignUpModal: false })
   }
 
+  showForgotPassword = () => {
+    this.setState({ showForgotPassword: true})
+  }
+
+  hideForgotPassword = () => {
+    this.setState({ showForgotPassword: false})
+  }
+
   signTheUserOut = (e) => {
     this.props.signOutUser()
   }
 
+  
   componentWillMount() {
     this.props.fetchShippingRegions()
     let token = localStorage.get("token")
@@ -76,11 +88,14 @@ class App extends Component {
                 <Nav.Link className={this.props.authentication.authenticated ? 'hidden' : ''} href="#" tag={ReactLink} to="/" onClick={this.showSignUpModal}>Sign Up</Nav.Link>
               </Nav>
             </Navbar>
-            <SignIn show={this.state.showSignInModal} handleClose={this.hideSignInModal} />
+            <SignIn show={this.state.showSignInModal} handleClose={this.hideSignInModal} showForgot={this.showForgotPassword} />
             <SignUp show={this.state.showSignUpModal} handleClose={this.hideSignUpModal} displaySignIn={this.showSignInModal}/>
+            <ForgotPassword showForgotPass={this.state.showForgotPassword} handleClose={this.hideForgotPassword}/>
             <Switch>
               <Route exact path='/' render={() => <HomePage showSignIn={this.showSignInModal} showSignUp={this.showSignUpModal} />} />
               <Route exact path='/checkout' render={() => <CheckOut />} />
+              <Route exact path='/forgotpassword' render={() =><ForgotPassword/>}/>
+              <Route exact path='/resetpassword/:token' component={ResetPassword}/>
             </Switch>
           </Router>
         </div>

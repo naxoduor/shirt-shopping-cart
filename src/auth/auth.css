@@ -76,12 +76,13 @@
     color: #ffffff;
     text-decoration: none;
 }
+
 .input-group{ 
-    display: flex;
-    flex-direction: column;
-    width:80%;
-    margin: auto;
-    
+  display: flex;
+  flex-direction: column;
+  width:80%;
+  margin: auto;
+  
 }
 
 .login-register-input{
@@ -108,4 +109,38 @@
     border: 0px;
     background-color: #417cef;
     color: white;
+}
+
+.passwordbox{
+  display:flex;
+  flex: 1;
+  flex-wrap: wrap;
+  flex-direction: row;
+}
+
+.forgotfirst{
+  display: flex;
+  flex-direction: column;
+  width: 78%;
+  margin:auto;
+  padding: 1em;
+}
+
+.confirm-group{ 
+  display: flex;
+  flex-direction: column;
+  width:60%;
+  margin: auto;
+  
+}
+
+.forgotagain{
+  width: 20%;
+  margin: auto;
+
+}
+
+.linkin{
+  margin: auto;
+  background: 2px solid brown;
 }
