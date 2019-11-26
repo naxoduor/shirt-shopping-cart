@@ -34,18 +34,22 @@ export default class ResetPassword extends Component {
      }
  
      async componentDidMount() {
-         const {
+     const {
              match: {
                  params: { token }
              },
          } = this.props
+         console.log("log the props inside resetpassword")
          console.log(this.props)
+         console.log("make a request")
          try {
-             const response = axios.get('http://localhost:3003/reset', {
+             const response = await axios.get('http://localhost:8080/customers/reset', { headers: { authorization: `Bearer ${token}` } }, {
                  params: {
                      resetPasswordToken: token,
                  },
              });
+             console.log("print the response")
+             console.log(response.data)
  
              if(response.data.message==='password reset link a-ok'){
                  this.setState({
@@ -57,7 +61,7 @@ export default class ResetPassword extends Component {
              }
          } catch(error){
              console.log("error")
-             //console.log(error.response.data)
+             console.log(error.response.data)
              this.setState({
                  updated:false,
                  isLoading:false,
@@ -84,7 +88,7 @@ export default class ResetPassword extends Component {
             console.log(this.props)
              try {
                  let res='password updated'
-                 const response = axios.put('http://localhost:3003/updatePasswordViaEmail', 
+                 const response = axios.put('http://localhost:8080/customers/updatePasswordViaEmail', { headers: { authorization: `Bearer ${token}` } },
                  {
                      username,
                      password,
