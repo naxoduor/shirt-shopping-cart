@@ -47,7 +47,7 @@ class CheckOutForm extends Component {
     })
     let cartId = localStorage.get("cartId")
     let customerId = this.props.customer.item.customer_id
-    let shippingId = this.props.shippingId.items.shippingId
+    let shippingId = this.props.shippingId.shippingId
     let order={}
     order.cartId = cartId
     order.customerId = customerId
@@ -76,9 +76,10 @@ class CheckOutForm extends Component {
 
     handleAddShippingType = (event) => {
         event.preventDefault()
-        let shipping=JSON.parse(event.target.value)
-        let shipping_id=shipping.shipping_id
-        let shipping_cost=shipping.shipping_cost
+        let shipping=event.target.value
+        let shippingvalues=shipping.split(",")
+        let shipping_cost=shippingvalues[0]
+        let shipping_id=shippingvalues[1]
         this.props.updateShippingCost(shipping_cost)
         this.props.updateShippingId(shipping_id)
     }
@@ -96,7 +97,7 @@ class CheckOutForm extends Component {
         if (this.state.shippingPresent) {
                 renderShippingInfo = this.props.shippingInfo.items.map(shipping => {
                 return (
-                    <option value={JSON.stringify(shipping)}>{shipping.shipping_cost}</option>
+                    <option value={`${shipping.shipping_cost},${shipping.shipping_id}`}>{shipping.shipping_cost}</option>
                 )
             })
 

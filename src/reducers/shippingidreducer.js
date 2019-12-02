@@ -1,8 +1,7 @@
 import { UPDATE_SHIPPING_ID } from '../action/types';
 
 const initialState={
-    items: [],
-    item: {}
+    shipping_id:null
 };
 
 const shippingIdReducer = (state = initialState, action) => {
@@ -11,7 +10,7 @@ const shippingIdReducer = (state = initialState, action) => {
             case UPDATE_SHIPPING_ID:
             return {
                 ...state,
-                items: action.payload
+                shipping_id: action.payload
             }
         default: return state;
     }
