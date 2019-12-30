@@ -41,7 +41,6 @@ class ShirtList extends Component {
 
     hideCart = () => {
         this.setState({ showCart: false })
-
     }
 
     handleClick = (event) => {

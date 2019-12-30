@@ -6,7 +6,9 @@ console.log(baseURL)
 return axios.get((baseURL || this.baseURL) + '/oauth/v1/generate?grant_type=client_credentials', {
 headers: {
     'Authorization': 'Basic ' + auth,
-    'content-type': 'application/json'
+    'content-type': 'application/json',
+    'Origin': 'http://104.248.73.139'
+
 }    
 })    
 }

@@ -43,6 +43,7 @@ class Cart extends Component {
   }
 
   render() {
+
     const showHideClassName = this.props.show ? "cartmodal display-block" : "cartmodal display-none";
     return <div className={showHideClassName}>
       <h>CART ITEMS</h>
@@ -81,6 +82,7 @@ class Cart extends Component {
                 <td>{product.price * product.quantity}</td>
                 <td><span className="rmvItem" onClick={(e) => this.removeCartProduct(e, product.item_id)}>&times;</span></td>
               </tr>)
+              
             }
           </tbody>
         </table>
