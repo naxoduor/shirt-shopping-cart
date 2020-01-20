@@ -27,19 +27,15 @@ class SafaricomPayment extends Component {
             }
         })
         amount=500
-        console.log(amount)
-        console.log(msisdn)
-        console.log(billRefNumber)
+        
         this.props.c2bSimulate(msisdn, amount, billRefNumber, null, null)
     }
     render() {
         let phoneNumber = this.props.customer.item.mob_phone
         let msisdn=phoneNumber.replace(/^\+[0-9]/, '254');
-        let amount = "";
-        this.props.cartAmount.items.map(amt => {
-            if (amt.total_amount) {
-                amount = amt.total_amount
-            }
+        let total= 0;
+        this.props.orderDetails.items.map(product =>{
+            total=total+(product.unit_cost * product.quantity)
         })
         return (
             <div className="payment">
@@ -56,8 +52,8 @@ class SafaricomPayment extends Component {
                                 <input type="text" id="transaction" className="transaction-input" value={this.props.trxNumber.transactionNumber}></input>
                             </div>
                             <div className="input-group">
-                                <label htmlFor="amount" className="amount-label">amount</label>
-                                <input type="text" id="amount" className="amount-input" value={amount}></input>
+                                <label htmlFor="amount" className="amount-label">Amount</label>
+                                <input type="text" id="amount" className="amount-input" value={total}></input>
                             </div>
                             <div>
                                 <input type="submit" value="Submit"/>
@@ -73,7 +69,9 @@ const mapStateToProps = (state) => {
     return {
         trxNumber: state.trxNumber,
         cartAmount: state.cartAmount,
-        customer: state.customer
+        customer: state.customer,
+        cartItems: state.cartItems,
+        orderDetails: state.orderDetails
     }
 }
 

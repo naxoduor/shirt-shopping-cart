@@ -10,7 +10,8 @@ class Cart extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      checkoutactive: false
+      checkoutactive: false,
+      name:'Maradona'
     }
   }
 
@@ -28,10 +29,10 @@ class Cart extends Component {
   }
 
   handleAddProduct = (e, item_id) => {
-    e.preventDefault()
     let carturl = 'http://127.0.0.1:8080/shoppingcart/add'
     let quantity = e.target.value
-    this.props.updateCartItem(carturl, item_id, quantity)
+    this.props.updateCartItem(item_id, quantity)
+    this.setState({name:"Nax Oduor"})
   }
 
   removeCartProduct = (e, item_id) => {
@@ -43,6 +44,10 @@ class Cart extends Component {
   }
 
   render() {
+    let total=0
+    this.props.cartItems.items.map(product => 
+      total=total+(product.price*product.quantity)
+)
 
     const showHideClassName = this.props.show ? "cartmodal display-block" : "cartmodal display-none";
     return <div className={showHideClassName}>
@@ -50,15 +55,14 @@ class Cart extends Component {
       <div className="cart-main">
         <span className="close" onClick={this.props.handleClose}>&times;</span>
         <table>
-          <col width="150"></col>
-          <col width="150"></col>
-          <col width="150"></col>
-          <col width="150"></col>
-          <col width="150"></col>
-          <col width="150"></col>
+          <col width="160"></col>
+          <col width="160"></col>
+          <col width="160"></col>
+          <col width="160"></col>
+          <col width="160"></col>
+          <col width="160"></col>
           <tr>
             <th>Image</th>
-            <th>Attributes</th>
             <th>Quantity</th>
             <th>price</th>
             <th>Subtotal</th>
@@ -70,20 +74,26 @@ class Cart extends Component {
               this.props.cartItems.items.map(product => <tr>
                 <td>
                   <img
-                    height={70}
+                    height={80}
                     title={product.name}
-                    padding={10}
-                    src={`/products/${product.image}`}
+                    padding={5}
+                    src={`/energy/${product.image}`}
                   />
                 </td>
-                <td>{product.attributes}</td>
-                <td>{product.price}</td>
                 <td><input type="number" min="0" max="10" step="1" defaultValue={product.quantity} onClick={(e) => this.handleAddProduct(e, product.item_id)} /></td>
+                <td>{product.price}</td>
                 <td>{product.price * product.quantity}</td>
                 <td><span className="rmvItem" onClick={(e) => this.removeCartProduct(e, product.item_id)}>&times;</span></td>
-              </tr>)
-              
+                {this.state.update}
+              </tr>
+              )
             }
+            <tr>
+                <td>TOTAL</td>
+                <td></td>
+                <td></td>
+                <td>{total}</td>
+              </tr>
           </tbody>
         </table>
         <div><button className="checkoutbtn" onClick={this.checkout}>Checkout</button></div>

@@ -32,10 +32,10 @@
 
   .close {
     position: absolute;
-    right: 25px;
-    top: 0;
+    right: 380px;
+    top: 25px;
     color: #000;
-    font-size: 35px;
+    font-size: 50px;
     font-weight: bold;
   }
   

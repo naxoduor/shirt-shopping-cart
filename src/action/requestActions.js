@@ -11,17 +11,20 @@ import {
     FETCH_SHIPPING_INFO, UPDATE_CATEGORYID, UPDATE_DEPARTMENTID, UPDATE_SHIPPING_ID,
     FETCH_SEARCH_PRODUCTS, LOGIN_SUCCESS, LOGOUT_SUCCESS,
     FETCH_ATTRIBUTES, UPDATE_AUTHORIZATION, TOKEN_ERROR, FETCH_ORDER_DETAILS,
-    UPDATE_TRANSACTION_NUMBER, UPDATE_SHIPPING_COST, CUSTOMER_DETAILS
+    UPDATE_TRANSACTION_NUMBER, UPDATE_SHIPPING_COST, CUSTOMER_DETAILS, FETCH_CART_ITEMS_ERROR
 } from './types'
 
 export const fetchCatalogueProducts = (productsurl) => dispatch => {
 
     let productsurl = "http://127.0.0.1:8080/products"
     axios.get(productsurl)
-        .then(res => res.data)
-        .then(products => dispatch({
+        .then(res => dispatch({
             type: FETCH_CATALOGUE_PRODUCTS,
-            payload: products
+            payload: res.data
+        }))
+        .catch(error=> dispatch({
+            type: FETCH_CATALOGUE_PRODUCTS,
+            payload: []
         }))
 }
 
@@ -29,10 +32,13 @@ export const searchProducts = (searchurl, params) => dispatch => {
 
     let searchurl = "http://127.0.0.1:8080/products/search"
     axios.post(searchurl, { params })
-        .then(res => res.data)
-        .then(products => dispatch({
+        .then(res => dispatch({
             type: FETCH_SEARCH_PRODUCTS,
-            payload: products
+            payload: res.data
+        }))
+        .catch(error=> dispatch({
+            type: FETCH_SEARCH_PRODUCTS,
+            payload: []
         }))
 }
 
@@ -40,10 +46,13 @@ export const fetchDepartments = (departmentsurl) => dispatch => {
 
     let departmentsurl = "http://127.0.0.1:8080/departments"
     axios.get(departmentsurl)
-        .then(res => res.data)
-        .then(departments => dispatch({
+        .then(res => dispatch({
             type: FETCH_DEPARTMENTS,
-            payload: departments
+            payload: res.data
+        }))
+        .catch(error=> dispatch({
+            type: FETCH_DEPARTMENTS,
+            payload: []
         }))
 }
 
@@ -51,10 +60,13 @@ export const fetchCategories = (categoriesurl) => dispatch => {
 
     let categoriesurl = "http://127.0.0.1:8080/categories"
     axios.get(categoriesurl)
-        .then(res => res.data)
-        .then(categories => dispatch({
+        .then(res => dispatch({
             type: FETCH_CATEGORIES,
-            payload: categories
+            payload: res.data
+        }))
+        .catch(error=> dispatch({
+            type: FETCH_CATEGORIES,
+            payload: []
         }))
 }
 
@@ -62,10 +74,13 @@ export const fetchCategoriesByDepartment = (departmentcategoriesurl, id) => disp
 
     let departmentcategoriesurl = `http://127.0.0.1:8080/categories/inDepartment/${id}`;
     axios.get(departmentcategoriesurl)
-        .then(res => res.data)
-        .then(categories => dispatch({
+        .then(res => dispatch({
             type: FETCH_CATEGORIES_BY_DEPARTMENT,
-            payload: categories
+            payload: res.data
+        }))
+        .catch(error=> dispatch({
+            type: FETCH_CATEGORIES_BY_DEPARTMENT,
+            payload: []
         }))
 }
 
@@ -74,14 +89,17 @@ export const fetchProductsByDepartment = (departmentproductsurl, id) => dispatch
     let obj = {}
     obj.department_id = id
     axios.get(departmentproductsurl)
-        .then(res => res.data)
-        .then(products => dispatch({
+        .then(res => dispatch({
             type: FETCH_PRODUCTS_BY_DEPARTMENT,
-            payload: products
+            payload: res.data
         }),
             dispatch({
                 type: UPDATE_DEPARTMENTID,
                 payload: obj
+            }))
+            .catch(error=> dispatch({
+                type: FETCH_PRODUCTS_BY_DEPARTMENT,
+                payload: []
             }));
 }
 
@@ -91,25 +109,26 @@ export const fetchProductsByCategory = (productsurl, id) => dispatch => {
     let obj = {}
     obj.category_id = id
     axios.get(productsurl)
-        .then(res => res.data)
-        .then(products => dispatch({
+        .then(res => dispatch({
             type: FETCH_PRODUCTS_BY_CATEGORY,
-            payload: products
+            payload: res.data
         }),
             dispatch({
                 type: UPDATE_CATEGORYID,
                 payload: obj
-            })
-        )
+            }))
+            .catch(error=> dispatch({
+                type: FETCH_PRODUCTS_BY_CATEGORY,
+                payload: []
+            }))
 }
 
 export const generateUniqueCartId = (carturl) => dispatch => {
 
     let carturl = "http://127.0.0.1:8080/shoppingcart/generateUniqueId"
     axios.get(carturl)
-        .then(res => res.data)
-        .then(cartid => {
-            localStorage.set("cartId", cartid)
+        .then(res => {
+            localStorage.set("cartId", res.data)
         })
 }
 
@@ -121,33 +140,51 @@ export const addToCart = (carturl, cartId, item, quantity) => dispatch => {
     params.attributes = `Color is ${item.color} and size is ${item.size}`
     params.quantity = quantity
     axios.post(carturl, { params })
-    .then(res=>res.data)
-    .then(cartItems => 
+    .then(res => 
         dispatch({
             type: FETCH_CART_ITEMS,
-            payload: cartItems
+            payload: res.data
+        }))
+        .catch(error=> dispatch({
+            type: FETCH_CART_ITEMS,
+            payload: []
         }))
 }
 
-export const updateCartItem = (carturl, item_id, quantity) => dispatch => {
+export const updateCartItem = (item_id, quantity) => dispatch => {
 
-    let carturl = `http://127.0.0.1:8080/shoppingcart/update/${item_id}`
+    
+    let cart_id = localStorage.get("cartId")
+    let paramstr='&'
+    let joined_ids=`${item_id}${paramstr}${cart_id}`
+    let carturl = `http://127.0.0.1:8080/shoppingcart/update/${joined_ids}`
     let params = {}
+    let itemList = []
     params.quantity = quantity
     axios.put(carturl, { params })
-
+        .then(res => dispatch({
+            type: FETCH_CART_ITEMS,
+            payload: res.data
+        }))
+        .catch(error=> dispatch({
+            type: FETCH_CART_ITEMS_ERROR,
+            payload: itemList
+        }))
 }
 
 export const fetchCartItems = (carturl, cart_id) => dispatch => {
 
+    let itemList=[]
     let carturl = `http://127.0.0.1:8080/shoppingcart/${cart_id}`
     console.log(carturl)
     axios.get(carturl)
-        .then(res => res.data)
-        
-        .then(cartItems => dispatch({
+        .then(res => dispatch({
             type: FETCH_CART_ITEMS,
-            payload: cartItems
+            payload: res.data
+        }))
+        .catch(error=> dispatch({
+            type: FETCH_CART_ITEMS_ERROR,
+            payload:error.response
         }))
 }
 
@@ -155,10 +192,13 @@ export const fetchCartTotalAmount = (carturl, cart_id) => dispatch => {
 
     let carturl = `http://127.0.0.1:8080/shoppingcart/totalamount/${cart_id}`
     axios.get(carturl)
-        .then(res => res.data)
-        .then(cartAmount => dispatch({
+        .then(res => dispatch({
             type: FETCH_CART_AMOUNT,
-            payload: cartAmount
+            payload: res.data
+        }))
+        .catch(error=> dispatch({
+            type: FETCH_CART_AMOUNT,
+            payload: []
         }))
 }
 
@@ -166,10 +206,13 @@ export const fetchTotalDepartmentItems = (totalitemsurl, id) => dispatch => {
 
     let totalitemsurl = `http://127.0.0.1:8080/departments/totalitems/${id}`
     axios.get(totalitemsurl)
-        .then(res => res.data)
-        .then(totalItems => dispatch({
+        .then(res => dispatch({
             type: CATEGORY_OR_PRODUCT_ITEMS_NUMBER,
-            payload: totalItems
+            payload: res.data
+        }))
+        .catch(error=> dispatch({
+            type: CATEGORY_OR_PRODUCT_ITEMS_NUMBER,
+            payload: []
         }))
 }
 
@@ -178,61 +221,71 @@ export const fetchTotalCategoryItems = (totalitemsurl, id) => dispatch => {
     let totalitemsurl = `http://127.0.0.1:8080/categories/totalitems/${id}`
 
     axios.get(totalitemsurl)
-        .then(res => res.data)
-        .then(totalItems => dispatch({
+        .then(res => dispatch({
             type: CATEGORY_OR_PRODUCT_ITEMS_NUMBER,
-            payload: totalItems
+            payload: res.data
+        }))
+        .catch(error=> dispatch({
+            type: CATEGORY_OR_PRODUCT_ITEMS_NUMBER,
+            payload: []
         }))
 }
 
 export const fetchDepartmentPageProducts = (finalurl, params) => dispatch => {
 
     axios.post(finalurl, { params })
-        .then(res => res.data)
-        .then(products => dispatch({
+        .then(res => dispatch({
             type: FETCH_DEPARTMENT_PAGE_PRODUCTS,
-            payload: products
+            payload: res.data
+        }))
+        .catch(error=> dispatch({
+            type: FETCH_DEPARTMENT_PAGE_PRODUCTS,
+            payload: []
         }))
 }
 
 export const removeCartProduct = (carturl, item_id) => dispatch => {
 
+    let itemList=[]
     let cart_id = localStorage.get("cartId")
     let paramstr='&'
     let joined_ids=`${item_id}${paramstr}${cart_id}`
     let carturl = `http://127.0.0.1:8080/shoppingcart/removeProduct/${joined_ids}`
     axios.delete(carturl)
-        .then(res => res.data)
-        .then(cartItems => dispatch({
+        .then(res => dispatch({
             type: FETCH_CART_ITEMS,
-            payload: cartItems
+            payload: res.data
+        }))
+        .catch(error=> dispatch({
+            type: FETCH_CART_ITEMS_ERROR,
+            payload: itemList
         }))
 }
 
 export const fetchCategoryPageProducts = (finalurl, params) => dispatch => {
 
     axios.post(finalurl, { params })
-        .then(res => res.data)
-        .then(products => dispatch({
+        .then(res => dispatch({
             type: FETCH_CATEGORY_PAGE_PRODUCTS,
-            payload: products
-        })
-        )
+            payload: res.data
+        }))
+        .catch(error=> dispatch({
+            type: FETCH_CATEGORY_PAGE_PRODUCTS,
+            payload: []
+        }))
 }
 
 export const signupUser = (username, email, password, mobile) => dispatch => {
     axios.post('http://127.0.0.1:8080/customers', { username, email, password, mobile })
-        .then((res) => res.data)
-        .then(data => dispatch({
+        .then(res => dispatch({
             type: SIGNED_UP_LOCALLY
         }))
 }
 
 export const signinUser = (email, password) => dispatch => {
     axios.post('http://127.0.0.1:8080/customers/login', { email, password })
-        .then(res => res.data)
-        .then(token => {
-            localStorage.set("token", token)
+        .then(res => {
+            localStorage.set("token", res.data)
             dispatch({
                 type: LOGIN_SUCCESS,
                 payload: true
@@ -263,10 +316,13 @@ export const fetchDepartmentPaginationProducts = (finalurl, id, params) => dispa
     let obj = {}
     obj.department_id = params.department_id
     axios.post(finalurl, { params })
-        .then(res => res.data)
-        .then(products => dispatch({
+        .then(res => dispatch({
             type: FETCH_DEPARTMENT_PAGINATION_PRODUCTS,
-            payload: products
+            payload: res.data
+        }))
+        .catch(error=> dispatch({
+            type: FETCH_DEPARTMENT_PAGINATION_PRODUCTS,
+            payload: []
         }))
 }
 
@@ -274,10 +330,13 @@ export const fetchAttributes = (product_id) => dispatch => {
 
     let attributesurl = `http://127.0.0.1:8080/attributes/inAttribute/${product_id}`
     axios.get(attributesurl)
-        .then(res => res.data)
-        .then(attributes => dispatch({
+        .then(res => dispatch({
             type: FETCH_ATTRIBUTES,
-            payload: attributes
+            payload: res.data
+        }))
+        .catch(error=> dispatch({
+            type: FETCH_ATTRIBUTES,
+            payload: []
         }))
 }
 
@@ -287,22 +346,27 @@ export const fetchCategoryPaginationProducts = (finalurl, id, params) => dispatc
     let obj = {}
     obj.category_id = params.category_id
     axios.post(finalurl, { params })
-        .then(res => res.data)
-        .then(products => dispatch({
+        .then(res => dispatch({
             type: FETCH_CATEGORY_PAGINATION_PRODUCTS,
-            payload: products
-        })
-        )
+            payload: res.data
+        }))
+        .catch(error=> dispatch({
+            type: FETCH_CATEGORY_PAGINATION_PRODUCTS,
+            payload: []
+        }))
 }
 
 export const fetchShippingRegions = () => dispatch => {
     console.log("fetching shipping regions")
 
     axios.get('http://127.0.0.1:8080/shipping/regions/')
-        .then(res => res.data)
-        .then(shippingRegions => dispatch({
+        .then(res => dispatch({
             type: FETCH_SHIPPING_REGIONS,
-            payload: shippingRegions
+            payload: res.data
+        }))
+        .catch(error=> dispatch({
+            type: FETCH_SHIPPING_REGIONS,
+            payload: []
         }))
 }
 
@@ -310,10 +374,13 @@ export const fetchShippingInformation = (shipping_id) => dispatch => {
     let shipping = {}
     let shippinginfourl = `http://127.0.0.1:8080/shipping/regions/regionId/${shipping_id}`
     axios.get(shippinginfourl)
-        .then(res => res.data)
-        .then(shippinginfo => dispatch({
+        .then(res => dispatch({
             type: FETCH_SHIPPING_INFO,
-            payload: shippinginfo
+            payload: res.data
+        }))
+        .catch(error=> dispatch({
+            type: FETCH_SHIPPING_INFO,
+            payload: []
         }))
 }
 
@@ -335,9 +402,12 @@ export const updateShippingCost = (shipping_cost) => dispatch =>{
 
 export const createOrder = (order) => dispatch => {
     axios.post('http://127.0.0.1:8080/orders', { order })
-        .then(res => res.data)
-        .then(total_amount=>{
-            console.log(total_amount)
+        .then(res=>dispatch({
+            type: FETCH_ORDER_DETAILS,
+            payload: res.data
+        }))
+        .catch(error=> {
+            console.log(error)
         })
 }
 
@@ -362,10 +432,13 @@ export const authorizeCheckout = (token) => dispatch => {
 
 export const findOrderDetails = (dates) => dispatch => {
     axios.post('http://127.0.0.1:8080/orderdetails', { dates })
-        .then(res => res.data)
-        .then(orderdetails => dispatch({
+        .then(res => dispatch({
             type: FETCH_ORDER_DETAILS,
-            payload: orderdetails
+            payload: res.data
+        }))
+        .catch(error=> dispatch({
+            type: FETCH_ORDER_DETAILS,
+            payload: []
         }))
 }
 

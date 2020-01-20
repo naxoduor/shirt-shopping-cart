@@ -23,7 +23,7 @@ class ShirtListItem extends Component {
                     <div className="list_wrapper">
                         <img
                             title={this.props.product.name}
-                            src={`/products/${this.props.product.image}`}
+                            src={`/energy/${this.props.product.image}`}
                         />
                         <div className="title2">{this.props.product.name}</div>
                         <div className="priceButtons">${this.props.product.price}</div>

@@ -34,8 +34,10 @@ class ShirtList extends Component {
         
         let cartshoppingurl = "http://127.0.0.1:8080/shoppingcart/?cart_id=" + cart_id;
         this.props.fetchCartItems(cartshoppingurl, cart_id)
-        this.props.fetchCartTotalAmount(cartshoppingurl, cart_id)
+        //this.props.fetchCartTotalAmount(cartshoppingurl, cart_id)
+        if(token){
         this.props.authorizeCheckout(token.token)
+        }
         this.setState({ showCart: true })
     }
 

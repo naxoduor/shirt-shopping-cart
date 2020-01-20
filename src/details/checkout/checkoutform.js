@@ -217,7 +217,8 @@ const mapStateToProps = (state) => {
         shippingInfo: state.shippingInfo,
         customer: state.customer,
         shippingId: state.shippingId,
-        cartItems:state.cartItems
+        cartItems:state.cartItems,
+        orderDetails:state.orderDetails
     }
 }
 

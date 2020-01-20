@@ -10,7 +10,7 @@ class DetailsModal extends Component {
         this.state = {
             color: 'W',
             size: 'S',
-            quantity: ''
+            quantity: null
         }
     }
 
@@ -39,8 +39,13 @@ class DetailsModal extends Component {
 
     handleAddToCart = (event, product) => {
         event.preventDefault()
-        console.log(this.state.quantity)
-        let quantity= this.state.quantity
+        let quantity=1
+        if(this.state.quantity){
+            quantity=this.state.quantity
+        }
+        else{
+            quantity=1
+        }
         let carturl = 'http://127.0.0.1:8080/shoppingcart/add'
         let cartId = localStorage.get("cartId")
         this.props.addToCart(carturl, cartId, product, quantity)
@@ -79,7 +84,7 @@ class DetailsModal extends Component {
                                     height={150}
                                     width={170}
                                     title={this.props.product.name}
-                                    src={`/products/${this.props.product.image}`}
+                                    src={`/energy/${this.props.product.image}`}
                                 />
                             </div>
                             <div className='modalImage2'>
@@ -94,11 +99,12 @@ class DetailsModal extends Component {
                     </div>
                     <div className="right_frame">
                         <div className='modal-product-details'>
+                        <span className="close" onClick={this.props.handleClose}>&times;</span>
                             <div className='product-title'>{this.props.product.name}</div>
                             <div className='product-price'>${this.props.product.price}</div>
                             <div className='product-description'>{this.props.product.description}</div>
                             <label>Quantity</label>
-                            <input className="quainput" type="number" min={0} max={10} defaultValue="1" step={1} onClick={(e) => this.handleQuantityClick(e)}/>
+                            <input className="quainput" type="number" min={0} max={10} defaultValue={1} step={1} onClick={(e) => this.handleQuantityClick(e)}/>
                             <label className="label">size</label>
                             <div className='sizebs'>
                                     { renderSize }

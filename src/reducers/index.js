@@ -19,6 +19,7 @@ import attributesReducer from './attributesreducer'
 import authenticationReducer from './authenticationReducer'
 import transactonReducer from './transactionreducer'
 import shippingcostReducer from './shippingcostreducer'
+import orderdetailsReducer from './orderdetailsreducer'
 
 
 export default combineReducers({
@@ -40,5 +41,6 @@ export default combineReducers({
     auth: authReducer,
     firebase: firebaseReducer,
     trxNumber: transactonReducer,
-    shippingCost: shippingcostReducer
+    shippingCost: shippingcostReducer,
+    orderDetails: orderdetailsReducer
 })
