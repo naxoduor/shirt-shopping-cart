@@ -45,8 +45,14 @@ class Cart extends Component {
 
   render() {
     let total=0
+    let deliveryTotal=0
+
     this.props.cartItems.items.map(product => 
-      total=total+(product.price*product.quantity)
+      deliveryTotal=deliveryTotal+(product.delivery_cost*product.quantity)      
+    )
+
+    this.props.cartItems.items.map(product => 
+      total=total+(product.price*product.quantity)      
 )
 
     const showHideClassName = this.props.show ? "cartmodal display-block" : "cartmodal display-none";
@@ -93,6 +99,18 @@ class Cart extends Component {
                 <td></td>
                 <td></td>
                 <td>{total}</td>
+              </tr>
+              <tr>
+                <td>DELIVERY COST</td>
+                <td></td>
+                <td></td>
+                <td>{deliveryTotal}</td>
+              </tr>
+              <tr>
+                <td>TOTAL COST PLUS DELIVERY</td>
+                <td></td>
+                <td></td>
+                <td>{total+deliveryTotal}</td>
               </tr>
           </tbody>
         </table>
