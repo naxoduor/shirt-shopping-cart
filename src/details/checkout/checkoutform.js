@@ -70,18 +70,7 @@ class CheckOutForm extends Component {
     handleRegionChange = (event, id) => {
         event.preventDefault()
         let selectedRegion = event.target.value
-        this.props.fetchShippingInformation(selectedRegion)
-        this.setState({ shippingPresent: true })
-    }
-
-    handleAddShippingType = (event) => {
-        event.preventDefault()
-        let shipping=event.target.value
-        let shippingvalues=shipping.split(",")
-        let shipping_cost=shippingvalues[0]
-        let shipping_id=shippingvalues[1]
-        this.props.updateShippingCost(shipping_cost)
-        this.props.updateShippingId(shipping_id)
+        this.props.updateShippingId(selectedRegion)
     }
 
     render() {
@@ -92,80 +81,12 @@ class CheckOutForm extends Component {
             )
         })
 
-        let renderShippingInfo=[]
-
-        if (this.state.shippingPresent) {
-                renderShippingInfo = this.props.shippingInfo.items.map(shipping => {
-                return (
-                    <option value={`${shipping.shipping_cost},${shipping.shipping_id}`}>{shipping.shipping_cost}</option>
-                )
-            })
-
-        }
-
+      
         return (
             <div>
-                <h>Component Loaded</h>
+                <h>CHOOSE DELIVERY REGION</h>
                 <div>
                     <Form onSubmit={this.submitOrder}>
-                        <Row>
-                            <Col>
-                                <FormGroup controlId="formGridFirstName">
-                                    <FormLabel>First Name</FormLabel>
-                                    <FormControl type="text" name="firstName" placeholder="First Name" value={this.state.firstName} onChange={this.handleChange} />
-                                </FormGroup>
-                            </Col>
-                            <Col>
-                                <FormGroup controlId="formGridLastName">
-                                    <FormLabel>Last Name</FormLabel>
-                                    <FormControl type="text" name="lastName" placeholder="Last Name" value={this.state.lastName} onChange={this.handleChange} />
-                                </FormGroup>
-                            </Col>
-                            <Col>
-                                <FormGroup controlId="formGridEmail">
-                                    <FormLabel>Email</FormLabel>
-                                    <FormControl type="email" name="email" placeholder="Email" value={this.state.email} onChange={this.handleChange} />
-                                </FormGroup>
-                            </Col>
-                            <Col>
-                                <FormGroup controlId="formGridAddress">
-                                    <FormLabel>Address</FormLabel>
-                                    <FormControl type="text" name="address" placeholder="Address" value={this.state.address} onChange={this.handleChange} />
-                                </FormGroup>
-                            </Col>
-                        </Row>
-
-                        <Row>
-                            <Col>
-                                <FormGroup controlId="formGridCity">
-                                    <FormLabel>City</FormLabel>
-                                    <FormControl type="text" name="city" placeholder="City" value={this.state.city} onChange={this.handleChange} />
-                                </FormGroup>
-                            </Col>
-
-                            <Col>
-                                <FormGroup controlId="formGridState">
-                                    <FormLabel>State</FormLabel>
-                                    <FormControl type="text" name="state" placeholder="State" value={this.state.state} onChange={this.handleChange} />
-                                </FormGroup>
-                            </Col>
-
-                            <Col>
-                                <FormGroup controlId="formGridCountry">
-                                    <FormLabel>Country</FormLabel>
-                                    <FormControl type="text" name="country" placeholder="Country" value={this.state.country} onChange={this.handleChange} />
-                                </FormGroup>
-                            </Col>
-                        </Row>
-                        <Row>
-                            <Col>
-                                <FormGroup controlId="formGridZipCode">
-                                    <FormLabel>ZipCode</FormLabel>
-                                    <FormControl type="text" name="zipcode" placeholder="ZipCode" value={this.state.zipcode} onChange={this.handleChange} />
-                                </FormGroup>
-                            </Col>
-                        </Row>
-
                         <FormLabel>Shippng</FormLabel>
                         <Row>
                             <Col>
@@ -174,16 +95,6 @@ class CheckOutForm extends Component {
                                     <FormControl as="select" onChange={(e) => this.handleRegionChange(e)}>
                                         <option>Choose...</option>
                                         {renderRegions}
-                                    </FormControl>
-                                </FormGroup>
-                            </Col>
-
-                            <Col>
-                                <FormGroup controlId="formGridType">
-                                    <FormLabel>Type</FormLabel>
-                                    <FormControl as="select" onClick={(event)=>this.handleAddShippingType(event)}>
-                                        <option>Choose...</option>
-                                        {renderShippingInfo}
                                     </FormControl>
                                 </FormGroup>
                             </Col>

@@ -26,11 +26,11 @@ class ShirtListItem extends Component {
                             src={`/energy/${this.props.product.image}`}
                         />
                         <div className="title2">{this.props.product.name}</div>
-                        <div className="priceButtons">${this.props.product.price}</div>
+                        <div className="priceButtons">KSHS {this.props.product.price}</div>
                     </div>
                     <div className="item_details">
                         <h10 className="title">{this.props.product.name}</h10>
-                        <label className="priceButtons">${this.props.product.price}</label>
+                        <label className="priceButtons">KSHS {this.props.product.price}</label>
                         <button className="addButton">Add To Cart</button>
                     </div>
                 </div>

@@ -100,18 +100,6 @@ class Cart extends Component {
                 <td></td>
                 <td>{total}</td>
               </tr>
-              <tr>
-                <td>DELIVERY COST</td>
-                <td></td>
-                <td></td>
-                <td>{deliveryTotal}</td>
-              </tr>
-              <tr>
-                <td>TOTAL COST PLUS DELIVERY</td>
-                <td></td>
-                <td></td>
-                <td>{total+deliveryTotal}</td>
-              </tr>
           </tbody>
         </table>
         <div><button className="checkoutbtn" onClick={this.checkout}>Checkout</button></div>

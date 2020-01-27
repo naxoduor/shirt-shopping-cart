@@ -34,8 +34,12 @@ class SafaricomPayment extends Component {
         let phoneNumber = this.props.customer.item.mob_phone
         let msisdn=phoneNumber.replace(/^\+[0-9]/, '254');
         let total= 0;
+        let deliveryTotal=0;
         this.props.orderDetails.items.map(product =>{
             total=total+(product.unit_cost * product.quantity)
+        })
+        this.props.orderDetails.items.map(product =>{
+            deliveryTotal=deliveryTotal+(product.delivery_cost * product.quantity)
         })
         return (
             <div className="payment">
@@ -52,11 +56,8 @@ class SafaricomPayment extends Component {
                                 <input type="text" id="transaction" className="transaction-input" value={this.props.trxNumber.transactionNumber}></input>
                             </div>
                             <div className="input-group">
-                                <label htmlFor="amount" className="amount-label">Amount</label>
-                                <input type="text" id="amount" className="amount-input" value={total}></input>
-                            </div>
-                            <div>
-                                <input type="submit" value="Submit"/>
+                                <label htmlFor="amount" className="amount-label">AMOUNT PLUS DELIVERY COST</label>
+                                <input type="text" id="amount" className="amount-input" value={total+deliveryTotal}></input>
                             </div>
                         </div>
                     </form>
