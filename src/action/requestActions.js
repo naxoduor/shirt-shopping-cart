@@ -137,7 +137,7 @@ export const addToCart = (carturl, cartId, item, quantity) => dispatch => {
     let params = {}
     params.cartId = cartId
     params.productId = item.product_id
-    params.attributes = `Color is ${item.color} and size is ${item.size}`
+    //params.attributes = `Color is ${item.color} and size is ${item.size}`
     params.quantity = quantity
     axios.post(carturl, { params })
     .then(res => 

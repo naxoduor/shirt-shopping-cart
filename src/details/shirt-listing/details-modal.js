@@ -81,18 +81,18 @@ class DetailsModal extends Component {
                         <div className='right_images'>
                             <div className='modalImage'>
                                 <img
-                                    height={150}
-                                    width={170}
+                                    height={300}
+                                    width={350}
                                     title={this.props.product.name}
                                     src={`/energy/${this.props.product.image}`}
                                 />
                             </div>
                             <div className='modalImage2'>
                                 <img
-                                    height={40}
-                                    width={40}
+                                    height={80}
+                                    width={80}
                                     title={this.props.product.name}
-                                    src={`/products/${this.props.product.image}`}
+                                    src={`/energy/${this.props.product.image}`}
                                 />
                             </div>
                         </div>
@@ -105,19 +105,9 @@ class DetailsModal extends Component {
                             <div className='product-description'>{this.props.product.description}</div>
                             <label>Quantity</label>
                             <input className="quainput" type="number" min={0} max={10} defaultValue={1} step={1} onClick={(e) => this.handleQuantityClick(e)}/>
-                            <label className="label">size</label>
-                            <div className='sizebs'>
-                                    { renderSize }
-                                </div>
-                            </div>
-                            <label className='label'>Color</label><br/>
-                            <div className='moColorButtons'>
-                                    { renderColors }
                             </div>
                             <div className="cartbtn"><button className='cartButton' onClick={(e) => this.handleAddToCart(e, this.props.product)}>Add to Cart</button></div>
                         </div>
-
-
                     </div>
                 </div>
         )

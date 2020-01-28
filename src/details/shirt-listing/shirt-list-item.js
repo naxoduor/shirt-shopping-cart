@@ -8,7 +8,6 @@ class ShirtListItem extends Component {
 
     state = { show: false }
     showModal = (e, product_id) => {
-        this.props.fetchAttributes(product_id)
         this.setState({ show: true })
     }
 
@@ -43,7 +42,6 @@ class ShirtListItem extends Component {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        fetchAttributes: (product_id) => dispatch(fetchAttributes(product_id)),
     }
 }
 
