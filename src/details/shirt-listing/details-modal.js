@@ -101,7 +101,7 @@ class DetailsModal extends Component {
                         <div className='modal-product-details'>
                         <span className="close" onClick={this.props.handleClose}>&times;</span>
                             <div className='product-title'>{this.props.product.name}</div>
-                            <div className='product-price'>${this.props.product.price}</div>
+                            <div className='product-price'>KSHS {this.props.product.price}</div>
                             <div className='product-description'>{this.props.product.description}</div>
                             <label>Quantity</label>
                             <input className="quainput" type="number" min={0} max={10} defaultValue={1} step={1} onClick={(e) => this.handleQuantityClick(e)}/>
