@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import {Helmet} from 'react-helmet'
 import { Navbar, Nav, NavbarBrand, NavItem } from 'react-bootstrap';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import HomePage from './containers/homepage'
@@ -71,6 +72,11 @@ class App extends Component {
     return (
       <div className="App">
         <div>
+        <Helmet>
+         <title>PowerAfrica! Kenyan based online shop for solar Panels, Power Equipment and Electronics</title>
+         <meta name="description" content="Power Africa is your one stop shop for solaa panels, power equipment and amazing electronics" />
+        </Helmet>
+
           <Router>
             <Navbar bg="dark" variant="dark">
               <Navbar.Brand href="#home">
