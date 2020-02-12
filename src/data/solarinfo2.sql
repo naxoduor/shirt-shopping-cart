@@ -291,7 +291,7 @@ SPECIFICATIONS
 SKU: SO830LB189ZUENAFAMZ
 Main Material: Silicon,glass
 Size (L x W x H cm): 1150 x 80 x 8
-Weight (kg): 9', 15800, 20800.00, 1000, 'solarmax4.jpg', 'solarmax4.jpg', 'solarmax4.jpg', 0),
+Weight (kg): 9', 15800, 20800.00, 1000, 'solarmax4.jpg', 'solarmax4.jpg', 'solarmax4.jpg', 2),
 (5, 'solarmax 100 watt Solar Panel,charger controller, 300watt inverter, 3 bulbs', 'Product details
 solarmax solar panel have  high efficiency solar modules are constructed from 36 polycrystalline, (12V modules) or 72 cells (24V modules) cells. The cells are individually tested and matched for optimum performance before being built into the protective module structure. A Tedlar® base is used and ethylene vinyl acetate encapsulant. High transmission tempered glass protects the cells from the front and a high strength polymer sheet at the rear. A reinforced aluminium frame completes the laminate structure which is fully sealed against moisture and protected from environmental and mechanical damage.Most common mistake people is mixing of batterys. car batterys are not good in solar storage and have internal resistancefor more information, contact the seller  for guideline 
 A basic charge controller simply performs the necessary function of ensuring that your batteries cannot be damaged by over-charging, effectively cutting off the current from the PV panels (or reducing it to a pulse) when the battery voltage reaches a certain level.', 'Specifications
@@ -325,7 +325,7 @@ Wattage: 100w 12v - 18v
 Care Label: INSTALLED BY QUALIFIED ELECTRICAL TECHNICIAN ( reowatt electricals)<br />
 Main Material: Silicon,glass
 Size (L x W x H cm): 1120 x80 x 8
-Weight (kg): 7', 10500, 15000.00, 1000, 'solarmax5.jpg', 'solarmax5.jpg', 'solarmax5.jpg', 0),
+Weight (kg): 7', 10500, 15000.00, 1000, 'solarmax5.jpg', 'solarmax5.jpg', 'solarmax5.jpg', 2),
 (6, 'solarmax 200Watts Solar Panel with 300Watt Inverter and 20A charge controller', 'Product details
 200Watts Solar Panel with 300Watt Inverter and 20A charge controller
 High module conversion efficiency. Ideal output for single panel: 200Wh per day (depending on the availability of sunlight).
@@ -388,7 +388,7 @@ Main Material: Silicon,Glass
 Production Country: China
 Size (L x W x H cm): 1120 x80 x 8
 Weight (kg): 7
-', 18500, 22000.00, 1000, 'solarmax6.jpg', 'solarmax6.jpg', 'solarmax6.jpg', 0),
+', 18500, 22000.00, 1000, 'solarmax6.jpg', 'solarmax6.jpg', 'solarmax6.jpg', 2),
 (7, 'solarmax Monocrystalline solar Panel - 80W - 18volts -', 'Product details
 High module conversion efficiency. Ideal output for single panel: 80Wh per day (depending on the availability of sunlight).
 Bypass diode minimizes power drop caused by shade and ensures excellent performance in low-light environments
@@ -438,7 +438,7 @@ Wattage: 50watts
 Care Label: Fragile
 Main Material: Alluminium and silicon
 Size (L x W x H cm): 63*54*30
-Weight (kg): 3.8', 6999, 10999.00, 1000, 'solarmax8.jpg', 'solarmax8.jpg', 'solarmax8.jpg', 0),
+Weight (kg): 3.8', 6999, 10999.00, 1000, 'solarmax8.jpg', 'solarmax8.jpg', 'solarmax8.jpg', 2),
 (9, 'solarmax 200W Mono Crystalline Solar Panel,High Efficiency Cells
 ', 'Product details
 Mono-crystalline High efficiency Solar panel and 12 Volts output. The panel comes with a warranty of 25 years and are entirely made from high quality materials. This panel is ideal for home inverters, battery charging, street lighting and other applications
@@ -492,7 +492,7 @@ Weight (kg): 14.2', 19199, 29199.00, 1000, 'solarmax10.jpg', 'solarmax10.jpg', '
 Excellent Low Light Performance
 High Efficiency with High Transparency Low Iron Tempered Glass
 Rugged Extruded and Anodized Aluminum Frame, Fully Sealed
-41" Cable with MC4 Connector', 'NEW', 15273, 15273.00, 1000, 'suntech11.jpg', 'suntech11.jpg', 'suntech11.jpg', 0),
+41" Cable with MC4 Connector', 'NEW', 15273, 15273.00, 1000, 'suntech11.jpg', 'suntech11.jpg', 'suntech11.jpg', 2),
 (12, 'Suntech Solar Module, 270W, PolyCrystalline, 60-cell, 25yrs Warranty, EIC, TUV, CE STP-270-20/Wfw', 'DESCRIPTION:
 This module is perfect for both residential and industrial roofs and has been tested in many climates. The 25 year warranty is also included with this module. Remember that the 250w – 290w range are almost always 60 cell modules, which are not suitable for battery charging except with a MPPT controller. In battery language, they are nominal 18v modules. If you use a PWM charge controller with these modules, you will harvest approximately half of the rated power.', 'Electrical Characteristics
 Maximum Power at STC (Pmax) 275 W 270 W 265 W
@@ -536,7 +536,7 @@ Pieces per pallet 30 30
 Pallets per container 6 28
 Pieces per container 180 840
 
-', 14441, 14441.00, 1000, 'suntech12.jpg', 'suntech12.jpg', 'suntech12.jpg', 0),
+', 14441, 14441.00, 1000, 'suntech12.jpg', 'suntech12.jpg', 'suntech12.jpg', 2),
 (13, 'Generic Lingoi power inverter', 'Product details
 If you are looking for a realible DC-AC power inverter, then the 300W Lingqi DC to AC Power Inverter is the best deal for you. Ideally, it is compatible for all kinds of electric equipments with power consumption of less than 500W with voltages equal to AC 220V, such as cell-phone, portable computer, electric light, digital camera, TV, CD player, DVD, electric fan, electric tool and so on. The output is a universal socket, which can be used in many electrical installations. Order for this DC-AC power inverter online on Jumia Kenya and have it delivered to you at an amazing price.', 'Specifications
 KEY FEATURES
@@ -579,7 +579,7 @@ Care Label: FRAGILE&nbsp;
 Main Material: metal
 Size (L x W x H cm): 16.8x9.2x3.4
 Weight (kg): 0.32
-', 2400, 2400.00, 1000, 'inverter14.jpg', 'inverter14.jpg', 'inverter14.jpg', 0),
+', 2400, 2400.00, 1000, 'inverter14.jpg', 'inverter14.jpg', 'inverter14.jpg', 2),
 (15, 'solarmax 600W POWER INVERTER (MOSFET)', 'Product details
 SolarMax has designed a compact and stylish modified sine wave inverter that operates silently
 This inverter is ideal for electrical equipment with a consumption lower than 600W with a voltage of 220V such as cell phones, TVs, DVDs, laptops, electric lights, digital cameras, electric fans, electric tools and so on.
@@ -606,8 +606,8 @@ Capacity (L): 300
 Care Label: FRAGILE&nbsp;
 Main Material: metal
 Size (L x W x H cm): 16.8x9.2x3.4
-Weight (kg): 0.32', 3700, 3700.00, 500, 'inverter15.jpg', 'inverter15.jpg', 'inverter15.jpg', 0),
-(16, 'Generic 1000W Grid Tie Inverter 230V MPPT Pure Sine Wave Inverter 50Hz/60Hz', 'Generic 1000W Grid Tie Inverter 230V MPPT Pure Sine Wave Inverter 50Hz/60Hz','Generic 1000W Grid Tie Inverter 230V MPPT Pure Sine Wave Inverter 50Hz/60Hz', 3700, 3700.00, 500, 'inverter16.jpg', 'inverter16.jpg', 'inverter16.jpg', 0),
+Weight (kg): 0.32', 3700, 3700.00, 500, 'inverter15.jpg', 'inverter15.jpg', 'inverter15.jpg', 2),
+(16, 'Generic 1000W Grid Tie Inverter 230V MPPT Pure Sine Wave Inverter 50Hz/60Hz', 'Generic 1000W Grid Tie Inverter 230V MPPT Pure Sine Wave Inverter 50Hz/60Hz','Generic 1000W Grid Tie Inverter 230V MPPT Pure Sine Wave Inverter 50Hz/60Hz', 3700, 3700.00, 500, 'inverter16.jpg', 'inverter16.jpg', 'inverter16.jpg', 2),
 (17, 'solarmax 20A PWM Solar Panel Battery Charge Controller', 'Product details
 This is an intelligent solar charge anddischarge controller. Fixed LCD display with a very friendly interface, variouscontrol parameters can be flexibly set, fully meet your home Photovoltaicsystem (including home lighting system) requirements. Widely used for solargreen light, solar light billboards, solar insecticidal lights, solar powergeneration systems, ship solar power systems, solar power generation systems,and more.
 
