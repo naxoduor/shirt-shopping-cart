@@ -47,11 +47,12 @@ class Cart extends Component {
     let total=0
     let deliveryTotal=0
 
-    this.props.cartItems.items.map(product => 
+    this.props.cartItems.items && this.props.cartItems.items.map(product => 
       deliveryTotal=deliveryTotal+(product.delivery_cost*product.quantity)      
     )
+    
 
-    this.props.cartItems.items.map(product => 
+    this.props.cartItems.items && this.props.cartItems.items.map(product => 
       total=total+(product.price*product.quantity)      
 )
 
@@ -76,7 +77,7 @@ class Cart extends Component {
           </tr>
 
           <tbody>
-            {
+            { this.props.cartItems.items &&
               this.props.cartItems.items.map(product => <tr>
                 <td>
                   <img
