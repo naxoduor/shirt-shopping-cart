@@ -81,7 +81,7 @@ class App extends Component {
             <Navbar bg="dark" variant="dark">
               <Navbar.Brand href="#home">
                 <img
-                  src="/energy/solarmax3.jpg"
+                  //src="/energy/solarmax3.jpg"
                   width="5"
                   height="30"
                   className="d-inline-block align-top"
