@@ -81,11 +81,11 @@ class App extends Component {
             <Navbar bg="dark" variant="dark">
               <Navbar.Brand href="#home">
                 <img
-                  src="/images/solarmax7.jpg"
+                  src="/energy/solarmax7.jpg"
                   width="15"
                   height="30"
                   className="d-inline-block align-top"
-                  alt="tshirt shop logo"
+                  alt="PowerAfrica logo"
                 /> 
               </Navbar.Brand>
               <Nav className="ml-auto linkItems">
