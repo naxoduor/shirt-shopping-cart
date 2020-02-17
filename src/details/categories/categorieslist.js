@@ -20,7 +20,7 @@ class CategoriesList extends Component {
         this.props.fetchProductsByCategory(productsurl)
     }
     render() {
-        const renderCategories = this.props.categories.items.map(category=>(
+        const renderCategories = this.props.categories.items && this.props.categories.items.map(category=>(
             <button className="catButton"><li className="categoryListItem"><Link to={'/'} onClick={(e) => this.getCategoryProducts(e, category.category_id)}>{category.name}</Link></li></button>
         ))
         return(

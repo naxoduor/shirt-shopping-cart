@@ -51,7 +51,6 @@ class Cart extends Component {
       deliveryTotal=deliveryTotal+(product.delivery_cost*product.quantity)      
     )
     
-
     this.props.cartItems.items && this.props.cartItems.items.map(product => 
       total=total+(product.price*product.quantity)      
 )

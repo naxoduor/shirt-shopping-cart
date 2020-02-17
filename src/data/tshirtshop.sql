@@ -1,7 +1,7 @@
 -- Create tshirtshop tables
 
 -- Create department table
-CREATE TABLE `department` (
+CREATE TABLE IF NOT EXISTS `department` (
   `department_id` INT            NOT NULL  AUTO_INCREMENT,
   `name`          VARCHAR(100)   NOT NULL,
   `description`   VARCHAR(1000),
@@ -9,7 +9,7 @@ CREATE TABLE `department` (
 ) ENGINE=MyISAM;
 
 -- Create category table
-CREATE TABLE `category` (
+CREATE TABLE IF NOT EXISTS `category` (
   `category_id`   INT            NOT NULL  AUTO_INCREMENT,
   `department_id` INT            NOT NULL,
   `name`          VARCHAR(100)   NOT NULL,
@@ -19,7 +19,7 @@ CREATE TABLE `category` (
 ) ENGINE=MyISAM;
 
 -- Create product table
-CREATE TABLE `product` (
+CREATE TABLE IF NOT EXISTS `product` (
   `product_id`       INT           NOT NULL  AUTO_INCREMENT,
   `name`             VARCHAR(100)  NOT NULL,
   `description`      VARCHAR(1000) NOT NULL,
@@ -34,14 +34,14 @@ CREATE TABLE `product` (
 ) ENGINE=MyISAM;
 
 -- Create product_category table
-CREATE TABLE `product_category` (
+CREATE TABLE IF NOT EXISTS `product_category` (
   `product_id`  INT NOT NULL,
   `category_id` INT NOT NULL,
   PRIMARY KEY (`product_id`, `category_id`)
 ) ENGINE=MyISAM;
 
 -- Create attribute table (stores attributes such as Size and Color)
-CREATE TABLE `attribute` (
+CREATE TABLE IF NOT EXISTS `attribute` (
   `attribute_id` INT          NOT NULL  AUTO_INCREMENT,
   `name`         VARCHAR(100) NOT NULL, -- E.g. Color, Size
   PRIMARY KEY (`attribute_id`)
@@ -49,7 +49,7 @@ CREATE TABLE `attribute` (
 
 
 -- Create attribute_value table (stores values such as Yellow or XXL)
-CREATE TABLE `attribute_value` (
+CREATE TABLE IF NOT EXISTS `attribute_value` (
   `attribute_value_id` INT          NOT NULL  AUTO_INCREMENT,
   `attribute_id`       INT          NOT NULL, -- The ID of the attribute
   `value`              VARCHAR(100) NOT NULL, -- E.g. Yellow
@@ -58,7 +58,7 @@ CREATE TABLE `attribute_value` (
 ) ENGINE=MyISAM;
 
 -- Create product_attribute table (associates attribute values to products)
-CREATE TABLE `product_attribute` (
+CREATE TABLE IF NOT EXISTS `product_attribute` (
   `product_id`         INT NOT NULL,
   `attribute_value_id` INT NOT NULL,
   PRIMARY KEY (`product_id`, `attribute_value_id`)
@@ -66,7 +66,7 @@ CREATE TABLE `product_attribute` (
 
 
 -- Create shopping_cart table
-CREATE TABLE `shopping_cart` (
+CREATE TABLE IF NOT EXISTS `shopping_cart` (
   `item_id`     VARCHAR(255)  NOT NULL,
   `cart_id`     CHAR(32)      NOT NULL,
   `product_id`  INT           NOT NULL,
@@ -79,7 +79,7 @@ CREATE TABLE `shopping_cart` (
 ) ENGINE=MyISAM;
 
 -- Create orders table
-CREATE TABLE `orders` (
+CREATE TABLE IF NOT EXISTS `orders` (
   `order_id`     INT           NOT NULL  AUTO_INCREMENT,
   `total_amount` DECIMAL(10,2) NOT NULL  DEFAULT '0.00',
   `created_on`   DATETIME      NOT NULL,
@@ -98,7 +98,7 @@ CREATE TABLE `orders` (
 ) ENGINE=MyISAM;
 
 -- Create order_details table
-CREATE TABLE `order_detail` (
+CREATE TABLE IF NOT EXISTS `order_detail` (
   `item_id`      INT           NOT NULL  AUTO_INCREMENT,
   `order_id`     INT           NOT NULL,
   `product_id`   INT           NOT NULL,
@@ -111,14 +111,14 @@ CREATE TABLE `order_detail` (
 ) ENGINE=MyISAM;
 
 -- Create shipping_region table
-CREATE TABLE `shipping_region` (
+CREATE TABLE IF NOT EXISTS `shipping_region` (
   `shipping_region_id` INT          NOT NULL  AUTO_INCREMENT,
   `shipping_region`    VARCHAR(100) NOT NULL,
   PRIMARY KEY  (`shipping_region_id`)
 ) ENGINE=MyISAM;
 
 -- Create customer table
-CREATE TABLE `customer` (
+CREATE TABLE IF NOT EXISTS `customer` (
   `customer_id`        INT           NOT NULL AUTO_INCREMENT,
   `name`               VARCHAR(50)   NOT NULL,
   `email`              VARCHAR(100)  NOT NULL,
@@ -140,7 +140,7 @@ CREATE TABLE `customer` (
 ) ENGINE=MyISAM;
 
 -- Create shipping table
-CREATE TABLE `shipping` (
+CREATE TABLE IF NOT EXISTS `shipping` (
   `shipping_id`        INT            NOT NULL AUTO_INCREMENT,
   `shipping_type`      VARCHAR(100)   NOT NULL,
   `shipping_cost`      NUMERIC(10, 2) NOT NULL,
@@ -150,7 +150,7 @@ CREATE TABLE `shipping` (
 ) ENGINE=MyISAM;
 
 -- Create tax table
-CREATE TABLE `tax` (
+CREATE TABLE IF NOT EXISTS `tax` (
   `tax_id`         INT            NOT NULL  AUTO_INCREMENT,
   `tax_type`       VARCHAR(100)   NOT NULL,
   `tax_percentage` NUMERIC(10, 2) NOT NULL,
@@ -158,7 +158,7 @@ CREATE TABLE `tax` (
 ) ENGINE=MyISAM;
 
 -- Create audit table
-CREATE TABLE `audit` (
+CREATE TABLE IF NOT EXISTS `audit` (
   `audit_id`       INT      NOT NULL AUTO_INCREMENT,
   `order_id`       INT      NOT NULL,
   `created_on`     DATETIME NOT NULL,
@@ -169,7 +169,7 @@ CREATE TABLE `audit` (
 ) ENGINE=MyISAM;
 
 -- Create review table
-CREATE TABLE `review` (
+CREATE TABLE IF NOT EXISTS `review` (
   `review_id`   INT      NOT NULL  AUTO_INCREMENT,
   `customer_id` INT      NOT NULL,
   `product_id`  INT      NOT NULL,
@@ -187,6 +187,7 @@ INSERT INTO `department` (`department_id`, `name`, `description`) VALUES
        (2, 'Nature', 'Find beautiful T-shirts with animals and flowers in our Nature department!'),
        (3, 'Seasonal', 'Each time of the year has a special flavor. Our seasonal T-shirts express traditional symbols using unique postal stamp pictures.');
 
+
 -- Populate category table
 INSERT INTO `category` (`category_id`, `department_id`, `name`, `description`) VALUES
        (1, 1, 'French', 'The French have always had an eye for beauty. One look at the T-shirts below and you''ll see that same appreciation has been applied abundantly to their postage stamps. Below are some of our most beautiful and colorful T-shirts, so browse away! And don''t forget to go all the way to the bottom - you don''t want to miss any of them!'),
@@ -196,6 +197,8 @@ INSERT INTO `category` (`category_id`, `department_id`, `name`, `description`) V
        (5, 2, 'Flower', 'These unique and beautiful flower T-shirts are just the item for the gardener, flower arranger, florist, or general lover of things beautiful. Surprise the flower in your life with one of the beautiful botanical T-shirts or just get a few for yourself!'),
        (6, 3, 'Christmas', ' Because this is a unique Christmas T-shirt that you''ll only wear a few times a year, it will probably last for decades (unless some grinch nabs it from you, of course). Far into the future, after you''re gone, your grandkids will pull it out and argue over who gets to wear it. What great snapshots they''ll make dressed in Grandpa or Grandma''s incredibly tasteful and unique Christmas T-shirt! Yes, everyone will remember you forever and what a silly goof you were when you would wear only your Santa beard and cap so you wouldn''t cover up your nifty T-shirt.'),
        (7, 3, 'Valentine''s', 'For the more timid, all you have to do is wear your heartfelt message to get it across. Buy one for you and your sweetie(s) today!');
+
+
 
 -- Populate product table
 INSERT INTO `product` (`product_id`, `name`, `description`, `price`, `discounted_price`, `image`, `image_2`, `thumbnail`, `display`) VALUES
@@ -284,7 +287,7 @@ INSERT INTO `product` (`product_id`, `name`, `description`, `price`, `discounted
        (83, 'Weather Vane', 'This weather vane dates from the 1830''s and is still showing which way the wind blows! Trumpet your arrival with this unique Christmas T-shirt.', 15.95, 14.99, 'weather-vane.gif', 'weather-vane-2.gif', 'weather-vane-thumbnail.gif', 2),
        (84, 'Mistletoe', 'This well-known parasite and killer of trees was revered by the Druids, who would go out and gather it with great ceremony. Youths would go about with it to announce the new year. Eventually more engaging customs were attached to the strange plant, and we''re here to see that they continue with these cool Christmas T-shirts.', 19.00, 17.99, 'mistletoe.gif', 'mistletoe-2.gif', 'mistletoe-thumbnail.gif', 3),
        (85, 'Altar Piece', 'This beautiful angel Christmas T-shirt is awaiting the opportunity to adorn your chest!', 20.50, 18.50, 'altar-piece.gif', 'altar-piece-2.gif', 'altar-piece-thumbnail.gif', 2),
-       (86, 'The Three Wise Men', 'This is a classic rendition of one of the season�s most beloved stories, and now showing on a Christmas T-shirt for you!', 12.99, 0.00, 'the-three-wise-men.gif', 'the-three-wise-men-2.gif', 'the-three-wise-men-thumbnail.gif', 0),
+       (86, 'The Three Wise Men', 'This is a classic rendition of one of the seasons most beloved stories, and now showing on a Christmas T-shirt for you!', 12.99, 0.00, 'the-three-wise-men.gif', 'the-three-wise-men-2.gif', 'the-three-wise-men-thumbnail.gif', 0),
        (87, 'Christmas Tree', 'Can you get more warm and folksy than this classic Christmas T-shirt?', 20.00, 17.95, 'christmas-tree.gif', 'christmas-tree-2.gif', 'christmas-tree-thumbnail.gif', 2),
        (88, 'Madonna & Child', 'This exquisite image was painted by Filipino Lippi, a 15th century Italian artist. I think he would approve of it on a Going Postal Christmas T-shirt!', 21.95, 18.50, 'madonna-child.gif', 'madonna-child-2.gif', 'madonna-child-thumbnail.gif', 0),
        (89, 'The Virgin Mary', 'This stained glass window is found in Glasgow Cathedral, Scotland, and was created by Gabriel Loire of France, one of the most prolific of artists in this medium--and now you can have it on this wonderful Christmas T-shirt.', 16.95, 15.95, 'the-virgin-mary.gif', 'the-virgin-mary-2.gif', 'the-virgin-mary-thumbnail.gif', 2),
@@ -332,6 +335,17 @@ INSERT INTO `attribute_value` (`attribute_value_id`, `attribute_id`, `value`) VA
 INSERT INTO `product_attribute` (`product_id`, `attribute_value_id`)
        SELECT `p`.`product_id`, `av`.`attribute_value_id`
        FROM   `product` `p`, `attribute_value` `av`;
+
+
+
+
+-- Populate shopping_cart table
+INSERT INTO `shopping_cart` (`item_id`, `cart_id`, `product_id`, `attributes`, `quantity`, `buy_now`, `added_on`) VALUES
+       ('8f908bf0-d39a-11e9-b8cd-0db4155f50ba', 'zBGCpp1NDNJJrrqrq243N5AA65Mxo4vz', 97, 'Color is blue and size is XL', '4', true, NOW()),
+       ('bac667e0-d39a-11e9-b8cd-0db4155f50ba', 'zBGCpp1NDNJJrrqrq243N5AA65Mxo4vz', 99, 'Color is Blue and size is XL', '3', true, NOW()),
+       ('0387bdd0-d39b-11e9-b8cd-0db4155f50ba', 'zBGCpp1NDNJJrrqrq243N5AA65Mxo4vz', 31, 'Color is Black and size is M', '2', true, NOW()),
+       ('1273c090-edff-11e9-9758-cf5c93a7ccee', '4q1pHqxI5CEFB1zGGJzF2vNILzEIJ42z', 3, 'Color is Blue and size is M', '2', true, NOW());
+
 
 -- Populate shipping_region table
 INSERT INTO `shipping_region` (`shipping_region_id`, `shipping_region`) VALUES

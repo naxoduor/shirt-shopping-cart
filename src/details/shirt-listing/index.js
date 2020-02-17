@@ -73,7 +73,7 @@ class ShirtList extends Component {
 
     render() {
         let pageCount = "";
-        this.props.totalItems.items.map(page => {
+        this.props.totalItems.items && this.props.totalItems.items.map(page => {
             if (page.products_on_department_count) {
                 pageCount = page.products_on_department_count
             }
@@ -89,7 +89,7 @@ class ShirtList extends Component {
             pageNumbers.push(i);
         }
 
-        const renderPageNumbers = pageNumbers.map(number => {
+        const renderPageNumbers = pageNumbers && pageNumbers.map(number => {
             return (
                 <li
                     key={number}
@@ -101,7 +101,7 @@ class ShirtList extends Component {
         });
 
         let currentShirtProducts = this.props.products.items
-        const renderShirtProducts = currentShirtProducts.map(product => {
+        const renderShirtProducts = currentShirtProducts && currentShirtProducts.map(product => {
             return (
                 <ShirtListItem product={product} />
             )
