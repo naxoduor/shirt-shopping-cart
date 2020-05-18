@@ -1,6 +1,6 @@
 const axios = require('axios')
 const oauth = require('../endpoints/oauth')
-module.exports = async function (_baseURL = 'https://sandbox.safaricom.co.ke') {
+const reqq = async function (_baseURL = 'https://sandbox.safaricom.co.ke') {
 const credentials = await oauth()
 console.log(credentials.data)
 console.log(credentials.data['access_token'])
@@ -14,3 +14,4 @@ const instance = axios.create({
 })
 return instance    
 }
+export default reqq;

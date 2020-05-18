@@ -1,5 +1,5 @@
 const axios = require('axios')
-module.exports = function (consumerKey = '', consumerSecret = '', baseURL = 'https://sandbox.safaricom.co.ke') {
+const oa = function (consumerKey = '', consumerSecret = '', baseURL = 'https://sandbox.safaricom.co.ke') {
 const auth = Buffer.from(consumerKey + ':' + consumerSecret).toString('base64')
 console.log(auth)
 console.log(baseURL)
@@ -12,3 +12,5 @@ headers: {
 }    
 })    
 }
+
+export default oa;
