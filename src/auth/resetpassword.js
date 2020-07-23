@@ -43,7 +43,7 @@ export default class ResetPassword extends Component {
          console.log(this.props)
          console.log("make a request")
          try {
-             const response = await axios.get('http://localhost:8080/customers/reset', { headers: { authorization: `Bearer ${token}` } }, {
+             const response = await axios.get('http://localhost:8081/customers/reset', { headers: { authorization: `Bearer ${token}` } }, {
                  params: {
                      resetPasswordToken: token,
                  },
@@ -88,7 +88,7 @@ export default class ResetPassword extends Component {
             console.log(this.props)
              try {
                  let res='password updated'
-                 const response = axios.put('http://localhost:8080/customers/updatePasswordViaEmail', { headers: { authorization: `Bearer ${token}` } },
+                 const response = axios.put('http://localhost:8081/customers/updatePasswordViaEmail', { headers: { authorization: `Bearer ${token}` } },
                  {
                      username,
                      password,
