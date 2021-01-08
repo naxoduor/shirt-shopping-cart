@@ -68,7 +68,7 @@ CREATE TABLE `product_attribute` (
 
 -- Create shopping_cart table
 CREATE TABLE `shopping_cart` (
-  `item_id`     VARCHAR(255)  NOT NULL,
+  `item_id`     INT  NOT NULL,
   `cart_id`     CHAR(32)      NOT NULL,
   `product_id`  INT           NOT NULL,
   `attributes`  VARCHAR(1000) NOT NULL,
@@ -325,7 +325,7 @@ Pieces per pallet 30 30
 Pallets per container 6 28
 Pieces per container 180 840
 
-', 'KSh 14,441', 14,441.00, 'suntech12.jpg', 'suntech12.jpg', 'suntech12.jpg', 0),
+', 'KSh 14,441', 14,441.00, 'suntech12.jpg', 'suntech12.jpg', 'suntech12.jpg', 0);
 
 
 

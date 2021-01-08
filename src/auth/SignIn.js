@@ -2,8 +2,7 @@ import React, { Component } from 'react';
 import { signinUser } from '../action/requestActions'
 import { connect } from 'react-redux'
 import './auth.css';
-import { Navbar, Nav, NavbarBrand, NavItem } from 'react-bootstrap';
-import { NavLink as ReactLink } from 'react-router-dom';
+import SignInForm from '../components/forms/signinform'
 
 class SignIn extends Component {
     constructor() {
@@ -39,32 +38,7 @@ class SignIn extends Component {
             <div className={showHideClassName}>
                 <div className="signinmodal-main">
                     <span className="close" onClick={this.props.handleClose}>&times;</span>
-                    <form onSubmit={this.handleSubmit} className="white">
-                        <div className="header">Sign In</div>
-                        <div className="box">
-                            <div className="input-group">
-                                <label htmlFor="email" className="login-register-label">Email</label>
-                                <input type="email" id="email" className="login-register-input" placeholder="Email" onChange={this.handleChange}></input>
-                            </div>
-
-                            <div className="input-group">
-                                <label htmlFor="password" className="login-register-label">Password</label>
-                                <input type="password" id="password" className="login-register-input" placeholder="Password" onChange={this.handleChange}></input>
-                            </div>
-
-                            <div className="input-group">
-                                <button className="login-register-btn">Login</button>
-                            </div>
-                            <div className="linkin">
-                            <Nav>
-                                <Nav.Link  href="#" tag={ReactLink} to="/" onClick={this.forgotPassword}>Forgot Password</Nav.Link>
-                            </Nav>
-                            </div>
-                            <div className="red-text center">
-                            </div>
-                        </div>
-
-                    </form>
+                    <SignInForm handleSubmit={this.handleSubmit} forgotPassword={this.forgotPassword} handleChange={this.handleChange}/>
                 </div>
             </div>
         )

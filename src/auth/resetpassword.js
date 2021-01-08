@@ -174,9 +174,9 @@ export default class ResetPassword extends Component {
                  )}
                  <LinkButtons buttonText="Go Home" buttonStyle={homeButton} link="/"/>
              </div>
-         )
+         
             
-     }
+         )}
  }
  
  ResetPassword.propTypes = {

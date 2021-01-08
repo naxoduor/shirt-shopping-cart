@@ -1,17 +1,8 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import './auth.css';
-import {
-    LinkButtons,
-    SubmitButtons,
-    registerButton,
-    homeButton,
-    forgotButton,
-    email,
-    passwordform,
-    forgotfirst,
-    forgotsecond
-} from '../components'
+import ForgotPasswordForm from '../components/forms/forgotpasswordform'
+import ErrorForms from './errorforms'
 
 const title = 'Forgot Password Screen'
 
@@ -75,49 +66,12 @@ class ForgotPassword extends Component {
 
         return (
             <div className={showHideClassName}>
-            <div className="signinmodal-main">
-            <span className="close" onClick={this.props.handleClose}>&times;</span>
-                <h1 className='title'>{title}</h1>
-                <form onSubmit={this.sendEmail}>
-                    <div className="passwordbox">
-                        <div className="forgotfirst">
-                            <input id="email"
-                                label="email"
-                                value={email}
-                                onChange={this.handleChange}
-                                placeholder="Email Address"></input>
-                        </div>
-                        <div className="forgotagain">
-                            <SubmitButtons
-                                buttonStyle={forgotButton}
-                                buttonText="Send Password Reset Email" />
-                        </div>
-                    </div>
-                </form>
-                {showNullError && (
-                    <div>
-                        <p>The email address cannot be null</p>
-                    </div>
-                )}
-                {showError && (
-                    <div>
-                        <p>
-                            That email address isn&apos;t recognized. Please try again or
-                            register for a new account.
-                        </p>
-                        <LinkButtons
-                            buttonText="Register"
-                            buttonStyle={registerButton}
-                            link="/register" />
-                    </div>
-                )}
-                {messageFromServer === 'recovery email sent' && (
-                    <div>
-                        <h3>Password Reset Emaill Successfully Sent!</h3>
-                    </div>
-                )}
-                <LinkButtons buttonText="Go Home" buttonStyle={homeButton} link="/" />
-            </div>
+                <div className="signinmodal-main">
+                    <span className="close" onClick={this.props.handleClose}>&times;</span>
+                    <h1 className='title'>{title}</h1>
+                    <ForgotPasswordForm sendEmail={this.sendEmail} handleChange={this.handleChange} />
+                    <ErrorForms showError={showError} showNullError={showNullError} messageFromServer={messageFromServer} email={email}/>
+                </div>
             </div>
         );
     }
